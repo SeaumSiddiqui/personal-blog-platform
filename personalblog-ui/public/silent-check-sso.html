@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <script src="keycloak.js"></script>
+  <script>
+    const keycloak = Keycloak();
+    keycloak.init({ onLoad: 'check-sso' }).then(() => {
+      keycloak.silentAuth().catch(() => {
+        window.parent.postMessage('SSO_SILENT_FAIL', window.location.origin);
+      });
+    });
+  </script>
+</body>
+</html>

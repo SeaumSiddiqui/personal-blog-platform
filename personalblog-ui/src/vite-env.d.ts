@@ -1,0 +1,19 @@
+interface ImportMetaEnv {
+  // Application Environment
+  readonly VITE_APP_ENV: string
+  
+  // Keycloak Configuration
+  readonly VITE_KEYCLOAK_URL: string
+  readonly VITE_KEYCLOAK_REALM: string
+  readonly VITE_KEYCLOAK_CLIENT_ID: string
+  
+  // API Configuration
+  readonly VITE_API_BASE_URL: string
+  readonly VITE_API_BLOG_ENDPOINT: string
+  readonly VITE_API_PROTECTED_ENDPOINT: string
+  readonly VITE_API_FILE_UPLOAD_ENDPOINT: string
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}
