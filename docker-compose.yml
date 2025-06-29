@@ -16,7 +16,7 @@ services:
       - "8088:8080"
     networks:
       - app-network
-services:
+
   personalblog-api:
     image: seaumsiddiqui0/personalblog-api:1.0.0  # <-- Pull from Docker Hub
     container_name: personalblog-api
@@ -42,7 +42,7 @@ services:
       - app-network
 
   personalblog-ui:
-    image: seaumsiddiqui0/personalblog-ui:1.0.0  # <-- Pull from Docker Hub
+    image: seaumsiddiqui0/personalblog-ui:1.0.1  # <-- Pull from Docker Hub
     container_name: personalblog-ui
     ports:
       - "8080:80"
