@@ -16,7 +16,7 @@ services:
       - "8088:8080"
     networks:
       - app-network
-services:
+
   personalblog-api:
     image: seaumsiddiqui0/personalblog-api:1.0.0  # <-- Pull from Docker Hub
     container_name: personalblog-api
