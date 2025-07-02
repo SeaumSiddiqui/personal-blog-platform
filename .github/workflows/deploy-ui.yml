@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - 'personalblog-ui/**'
+  workflow_dispatch:
 
 jobs:
   build-and-deploy-ui:
@@ -51,6 +52,8 @@ jobs:
           username: ${{ secrets.VM_USER }}
           key: ${{ secrets.VM_SSH_KEY }}
           script: |
-            cd ~/personalblog
-            docker pull seaumsiddiqui0/personalblog-ui:latest
-            docker compose up -d personalblog-ui
+              cd ~/personalblog
+              docker pull seaumsiddiqui0/personalblog-ui:latest
+              docker compose stop personalblog-ui || true
+              docker compose rm -f personalblog-ui || true
+              docker compose up -d personalblog-ui

@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - 'personalblog-api/**'
+  workflow_dispatch:
 
 jobs:
   build-and-deploy-api:
@@ -45,4 +46,6 @@ jobs:
           script: |
             cd ~/personalblog
             docker pull seaumsiddiqui0/personalblog-api:latest
+            docker compose stop personalblog-api || true
+            docker compose rm -f personalblog-api || true
             docker compose up -d personalblog-api
