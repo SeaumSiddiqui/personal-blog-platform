@@ -45,4 +45,4 @@ jobs:
           script: |
             cd ~/personalblog
             docker pull seaumsiddiqui0/personalblog-api:latest
-            docker-compose up -d personalblog-api
+            docker compose up -d personalblog-api

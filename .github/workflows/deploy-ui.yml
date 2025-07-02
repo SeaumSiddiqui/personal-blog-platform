@@ -53,4 +53,4 @@ jobs:
           script: |
             cd ~/personalblog
             docker pull seaumsiddiqui0/personalblog-ui:latest
-            docker-compose up -d personalblog-ui
+            docker compose up -d personalblog-ui
