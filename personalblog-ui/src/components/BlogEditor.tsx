@@ -494,7 +494,7 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
           {/* Left-aligned elements */}
           <div className="flex items-center space-x-4">
             <Link
-              to="/"
+              to="/blogs"
               className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors duration-200 ${
                 isDarkMode
                   ? 'hover:bg-gray-700 text-gray-300'

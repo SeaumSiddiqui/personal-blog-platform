@@ -1,0 +1,116 @@
+[1mdiff --git a/docker-compose.yml b/docker-compose.yml[m
+[1mindex b4bf69e..8a72b74 100644[m
+[1m--- a/docker-compose.yml[m
+[1m+++ b/docker-compose.yml[m
+[36m@@ -1,8 +1,15 @@[m
+ services:[m
+   keycloak:[m
+     image: quay.io/keycloak/keycloak:24.0.4[m
+[32m+[m[32m    platform: linux/arm64[m
+     container_name: keycloak[m
+[31m-    command: start-dev[m
+[32m+[m[32m    command:[m
+[32m+[m[32m      - start-dev[m
+[32m+[m[32m      - --hostname=seaumsiddiqui.com[m
+[32m+[m[32m      - --hostname-strict=false[m
+[32m+[m[32m      - --hostname-strict-https=false[m
+[32m+[m[32m      - --proxy=edge[m
+[32m+[m[32m      - --http-relative-path=/auth[m
+     env_file:[m
+       - .env[m
+     environment:[m
+[36m@@ -16,9 +23,11 @@[m [mservices:[m
+       - "8088:8080"[m
+     networks:[m
+       - app-network[m
+[32m+[m[32m    restart: unless-stopped[m
+ [m
+   personalblog-api:[m
+[31m-    image: seaumsiddiqui0/personalblog-api:1.0.0  # <-- Pull from Docker Hub[m
+[32m+[m[32m    image: seaumsiddiqui0/personalblog-api:latest  # <-- Pull from Docker Hub[m
+[32m+[m[32m    platform: linux/arm64[m
+     container_name: personalblog-api[m
+     ports:[m
+       - "9099:9090"[m
+[36m@@ -40,9 +49,11 @@[m [mservices:[m
+       - ./config/oci.config:/config/oci.config:ro[m
+     networks:[m
+       - app-network[m
+[32m+[m[32m    restart: unless-stopped[m
+ [m
+   personalblog-ui:[m
+[31m-    image: seaumsiddiqui0/personalblog-ui:1.0.1  # <-- Pull from Docker Hub[m
+[32m+[m[32m    image: seaumsiddiqui0/personalblog-ui:latest # <-- Pull from Docker Hub[m
+[32m+[m[32m    platform: linux/arm64[m
+     container_name: personalblog-ui[m
+     ports:[m
+       - "8080:80"[m
+[36m@@ -50,6 +61,7 @@[m [mservices:[m
+       - personalblog-api[m
+     networks:[m
+       - app-network[m
+[32m+[m[32m    restart: unless-stopped[m
+ [m
+ networks:[m
+   app-network:[m
+[1mdiff --git a/personalblog-api b/personalblog-api[m
+[1m--- a/personalblog-api[m
+[1m+++ b/personalblog-api[m
+[36m@@ -1 +1 @@[m
+[31m-Subproject commit 84969de827832fae407dc13397cb4c5826805e8f[m
+[32m+[m[32mSubproject commit 84969de827832fae407dc13397cb4c5826805e8f-dirty[m
+[1mdiff --git a/personalblog-ui/Dockerfile b/personalblog-ui/Dockerfile[m
+[1mindex 8e3b644..477af62 100644[m
+[1m--- a/personalblog-ui/Dockerfile[m
+[1m+++ b/personalblog-ui/Dockerfile[m
+[36m@@ -1,32 +1,36 @@[m
+[31m-# --- Build stage: install Node deps and build app ---[m
+[32m+[m[32m# --- Build stage ---[m
+ FROM node:20-alpine AS build[m
+[31m-LABEL authors="seaum siddiqui"[m
+ WORKDIR /app[m
+ [m
+[31m-# Accept build arg to choose env file (default: dev)[m
+[31m-ARG VITE_APP_ENV=dev[m
+[32m+[m[32m# Accept the build mode (default: production)[m
+[32m+[m[32mARG VITE_APP_ENV=production[m
+[32m+[m
+[32m+[m[32m# Set mode as environment variable[m
+ ENV VITE_APP_ENV=$VITE_APP_ENV[m
+ [m
+[31m-# Copy package files and install dependencies[m
+[32m+[m[32m# Echo to verify what mode is used[m
+[32m+[m[32mRUN echo "🔧 Building with mode: ${VITE_APP_ENV}"[m
+[32m+[m
+[32m+[m[32m# Install dependencies[m
+ COPY package.json package-lock.json ./[m
+ RUN npm ci[m
+ [m
+[31m-# Copy the entire app source[m
+[32m+[m[32m# Copy app source[m
+ COPY . .[m
+ [m
+[31m-# Copy the appropriate .env file based on build arg[m
+[31m-RUN cp .env.$VITE_APP_ENV .env[m
+[32m+[m[32m# ⛏️ Build with correct mode[m
+[32m+[m[32mRUN npm run build -- --mode=${VITE_APP_ENV}[m
+ [m
+[31m-# Build the app[m
+[31m-RUN npm run build[m
+[31m-[m
+[31m-# --- Run stage: serve with Nginx ---[m
+[32m+[m[32m# --- Run stage ---[m
+ FROM nginx:alpine[m
+ [m
+[31m-# Clean default html dir[m
+[32m+[m[32m# Set environment variable in final image[m
+[32m+[m[32mENV VITE_APP_ENV=production[m
+[32m+[m
+[32m+[m[32m# Clean default HTML content[m
+ RUN rm -rf /usr/share/nginx/html/*[m
+ [m
+[31m-# Copy build output from previous stage[m
+[32m+[m[32m# Copy built assets[m
+ COPY --from=build /app/dist /usr/share/nginx/html[m
+ [m
+ # A

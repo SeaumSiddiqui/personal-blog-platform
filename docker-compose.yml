@@ -1,8 +1,15 @@
 services:
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.4
+    platform: linux/arm64
     container_name: keycloak
-    command: start-dev
+    command:
+      - start-dev
+      - --hostname=seaumsiddiqui.com
+      - --hostname-strict=false
+      - --hostname-strict-https=false
+      - --proxy=edge
+      - --http-relative-path=/auth
     env_file:
       - .env
     environment:
@@ -16,9 +23,11 @@ services:
       - "8088:8080"
     networks:
       - app-network
+    restart: unless-stopped
 
   personalblog-api:
-    image: seaumsiddiqui0/personalblog-api:1.0.0  # <-- Pull from Docker Hub
+    image: seaumsiddiqui0/personalblog-api:latest  # <-- Pull from Docker Hub
+    platform: linux/arm64
     container_name: personalblog-api
     ports:
       - "9099:9090"
@@ -40,9 +49,11 @@ services:
       - ./config/oci.config:/config/oci.config:ro
     networks:
       - app-network
+    restart: unless-stopped
 
   personalblog-ui:
-    image: seaumsiddiqui0/personalblog-ui:1.0.1  # <-- Pull from Docker Hub
+    image: seaumsiddiqui0/personalblog-ui:latest # <-- Pull from Docker Hub
+    platform: linux/arm64
     container_name: personalblog-ui
     ports:
       - "8080:80"
@@ -50,6 +61,7 @@ services:
       - personalblog-api
     networks:
       - app-network
+    restart: unless-stopped
 
 networks:
   app-network:

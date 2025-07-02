@@ -141,7 +141,7 @@ export const Footer: React.FC = () => {
             </h3>
             <div className="space-y-4">
               <Link
-                to="/home"
+                to="/blogs"
                 className={`block transition-colors duration-200 ${
                   isDarkMode
                     ? 'text-slate-300 hover:text-blue-400'

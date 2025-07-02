@@ -132,7 +132,7 @@ export const EditBlog: React.FC = () => {
       }
 
       // Navigate back to blog list
-      navigate('/');
+      navigate('/blogs');
     } catch (error) {
       console.error('Error updating blog post:', error);
       throw error;

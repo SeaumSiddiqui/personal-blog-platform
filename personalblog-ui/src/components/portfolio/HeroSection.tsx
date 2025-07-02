@@ -101,7 +101,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </button>
               
               <Link
-                to="/home"
+                to="/blogs"
                 className={`group flex items-center space-x-2 px-6 py-3 border-2 font-bold transition-all duration-300 transform hover:scale-105 ${
                   isDarkMode
                     ? 'border-[#c5bbb8] text-[#c5bbb8] hover:bg-[#c5bbb8] hover:text-black'

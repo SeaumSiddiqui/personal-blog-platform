@@ -1,32 +1,36 @@
-# --- Build stage: install Node deps and build app ---
+# --- Build stage ---
 FROM node:20-alpine AS build
-LABEL authors="seaum siddiqui"
 WORKDIR /app
 
-# Accept build arg to choose env file (default: dev)
-ARG VITE_APP_ENV=dev
+# Accept the build mode (default: production)
+ARG VITE_APP_ENV=production
+
+# Set mode as environment variable
 ENV VITE_APP_ENV=$VITE_APP_ENV
 
-# Copy package files and install dependencies
+# Echo to verify what mode is used
+RUN echo "🔧 Building with mode: ${VITE_APP_ENV}"
+
+# Install dependencies
 COPY package.json package-lock.json ./
 RUN npm ci
 
-# Copy the entire app source
+# Copy app source
 COPY . .
 
-# Copy the appropriate .env file based on build arg
-RUN cp .env.$VITE_APP_ENV .env
+# ⛏️ Build with correct mode
+RUN npm run build -- --mode=${VITE_APP_ENV}
 
-# Build the app
-RUN npm run build
-
-# --- Run stage: serve with Nginx ---
+# --- Run stage ---
 FROM nginx:alpine
 
-# Clean default html dir
+# Set environment variable in final image
+ENV VITE_APP_ENV=production
+
+# Clean default HTML content
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copy build output from previous stage
+# Copy built assets
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # Add custom Nginx config

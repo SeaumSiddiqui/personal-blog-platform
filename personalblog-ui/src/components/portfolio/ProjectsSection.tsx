@@ -41,7 +41,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ isDarkMode }) 
       technologies: ['Spring Boot', 'React', 'TypeScript', 'PostgreSQL', 'Keycloak', 'Oracle Object Storage', 'Docker'],
       status: 'Live',
       image: 'https://objectstorage.ap-mumbai-1.oraclecloud.com/n/bmihpqq11x49/b/blog-image-bucket-20241130-2238/o/1493409d-629e-4061-925e-956342cf8898_Screenshot%20%2818%29.png',
-      liveUrl: '/home',
+      liveUrl: '/blogs',
       githubUrl: 'https://github.com/seaum-siddiqui/blog-platform',
       featured: true
     },

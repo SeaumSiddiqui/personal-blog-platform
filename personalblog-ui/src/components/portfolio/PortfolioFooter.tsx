@@ -23,7 +23,7 @@ export const PortfolioFooter: React.FC<PortfolioFooterProps> = ({
       scrollToSection('hero');
     } else if (item.toLowerCase() === 'blog') {
       // Navigate to blog page using React Router
-      navigate('/home');
+      navigate('/blogs');
     } else {
       scrollToSection(item.toLowerCase());
     }

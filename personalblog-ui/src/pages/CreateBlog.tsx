@@ -54,7 +54,7 @@ export const CreateBlog: React.FC = () => {
       }
 
       // Navigate back to blog list
-      navigate('/');
+      navigate('/blogs');
     } catch (error) {
       console.error('Error creating blog post:', error);
       throw error;

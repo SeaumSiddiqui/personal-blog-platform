@@ -105,7 +105,7 @@ class KeycloakService {
 
     try {
       await this.keycloak.login({
-        redirectUri: `${window.location.origin}/home`,
+        redirectUri: `${window.location.origin}/blogs`,
         prompt: 'login'
       });
     } catch (error) {
@@ -142,7 +142,7 @@ class KeycloakService {
     } catch (error) {
       console.error('Logout failed:', error);
       // Force redirect to home even if logout fails
-      window.location.href = '/home';
+      window.location.href = '/blogs';
     }
   }
 

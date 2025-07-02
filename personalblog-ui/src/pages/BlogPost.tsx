@@ -83,7 +83,7 @@ export const BlogPost: React.FC = () => {
 
   const handleDelete = () => {
     // Navigate back to home after successful deletion
-    navigate('/');
+    navigate('/blogs');
   };
 
   const formatDate = (dateString: string) => {
@@ -135,7 +135,7 @@ export const BlogPost: React.FC = () => {
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-center justify-between h-16">
               <Link
-                to="/"
+                to="/blogs"
                 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
               >
                 Seaum Siddiqui
@@ -168,7 +168,7 @@ export const BlogPost: React.FC = () => {
             <p className="text-lg font-medium mb-2">Blog post not found</p>
             <p className="text-sm opacity-80 mb-4">{error}</p>
             <Link
-              to="/"
+              to="/blogs"
               className="inline-flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -204,7 +204,7 @@ export const BlogPost: React.FC = () => {
           {/* Left-aligned elements */}
           <div className="flex items-center space-x-4">
             <Link
-              to="/"
+              to="/blogs"
               className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors duration-200 ${
                 isDarkMode
                   ? 'hover:bg-slate-700 text-slate-300'
@@ -215,7 +215,7 @@ export const BlogPost: React.FC = () => {
               <span>Back</span>
             </Link>
             
-            <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <Link to="/blogs" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Seaum Siddiqui
             </Link>
           </div>

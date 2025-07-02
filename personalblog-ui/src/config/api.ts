@@ -3,11 +3,14 @@
 // Helper function to get environment variables with proper typing
 const getEnvVar = (key: keyof ImportMetaEnv, defaultValue: string): string => {
   const value = import.meta.env[key];
+  if (!value) {
+    console.warn(`⚠️ Environment variable ${key} not set. Using default: ${defaultValue}`);
+  }
   return value || defaultValue;
 };
 
 // Get current environment
-const isProduction = getEnvVar('VITE_APP_ENV', 'dev') === 'prod';
+const isProduction = getEnvVar('VITE_APP_ENV', 'development') === 'production';
 
 // API configuration from environment variables
 export const apiConfig = {
