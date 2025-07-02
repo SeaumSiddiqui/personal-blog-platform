@@ -1,0 +1,57 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:postgresql://ep-cool-brook-a1p1f5eh-pooler.ap-southeast-1.aws.neon.tech/blogdb?sslmode=require
+    username: neondb_owner
+    password: npg_Vc2osteCX0PS
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/personalblog
+
+app:
+  cors:
+    allowed-origins: http://localhost:5173
+
+jwt:
+  auth:
+    converter:
+      resource-id: springboot-client
+      principal-attribute: preferred_username
+
+oracle:
+  config:
+    path: C:/Users/Seaum siddiqui/Oracle Config/oci.config
+  cloud:
+    region: ap-mumbai-1
+    namespace: bmihpqq11x49
+    bucket-name: blog-image-bucket-20241130-2238
+
+server:
+  port: 9090  # Application will run on port :9090
+  error:
+    include-message: always  # Ensures error messages are included in responses
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org:
+      hibernate: DEBUG  # Hibernate logging to DEBUG for detailed SQL logs
