@@ -17,7 +17,7 @@ import static org.springframework.http.HttpMethod.DELETE;
 @EnableWebSecurity
 @Configuration
 public class SpringSecurityConfiguration {
-    public static final String READER = "blog-reader";
+    public static final String READER = "blog-reader"; // unused
     public static final String AUTHOR = "blog-author";
 
     private final JwtAuthConverter jwtAuthConverter;
