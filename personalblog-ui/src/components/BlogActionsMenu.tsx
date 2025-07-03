@@ -43,7 +43,7 @@ export const BlogActionsMenu: React.FC<BlogActionsMenuProps> = ({
       if (onDelete) {
         onDelete();
       } else {
-        navigate('/');
+        navigate('/blogs');
       }
     } catch (error) {
       console.error('Error deleting blog post:', error);

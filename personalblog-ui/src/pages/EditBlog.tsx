@@ -164,7 +164,7 @@ export const EditBlog: React.FC = () => {
           <p className="text-lg font-medium">Error loading blog post</p>
           <p className="text-sm mt-2 opacity-80">{error}</p>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/blogs')}
             className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
           >
             Back to Blog List

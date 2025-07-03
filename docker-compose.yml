@@ -46,7 +46,7 @@ services:
       APP_ALLOWED_ORIGINS: ${APP_ALLOWED_ORIGINS}
       ORACLE_CLOUD_CONFIG_PATH: ${ORACLE_CLOUD_CONFIG_PATH}
     volumes:
-      - ./config/oci.config:/config/oci.config:ro
+      - ./config:/config:ro
     networks:
       - app-network
     restart: unless-stopped

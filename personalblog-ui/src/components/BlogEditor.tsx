@@ -448,8 +448,8 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
   };
 
   const handleSave = async () => {
-    if (!editorData.title.trim() || !editorData.author.trim()) {
-      setError('Title and author are required');
+    if (!editorData.title.trim() || !editorData.author.trim() || !editorData.coverURL) {
+      setError('Banner, title and author are required');
       return;
     }
 
