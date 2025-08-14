@@ -145,10 +145,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     className={`w-full h-full object-cover transition-all duration-500 ${
                       imageTransition ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
                     }`}
-                    style={{
-                      imageRendering: 'pixelated',
-                      filter: isDarkMode ? 'contrast(1.2) brightness(0.9)' : 'contrast(1.1) brightness(1.1)'
-                    }}
+                    // style={{
+                    //   imageRendering: 'pixelated',
+                    //   filter: isDarkMode ? 'contrast(1.2) brightness(0.9)' : 'contrast(1.1) brightness(1.1)'
+                    // }}
                   />
                   
                   {/* Pixelated overlay effect
