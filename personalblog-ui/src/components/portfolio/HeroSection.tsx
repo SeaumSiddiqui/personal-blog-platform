@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Download, ArrowRight, MapPin, Coffee, BookOpen } from 'lucide-react';
 import { StatsSection } from './StatsSection';
+import profileImageDark from '../../assets/profile-image-dark.png';
 
 interface HeroSectionProps {
   isDarkMode: boolean;
@@ -137,7 +138,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <div className="relative w-full h-full">
                   <img
                     src={isDarkMode 
-                      ? "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop"
+                      ? profileImageDark
                       : "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop"
                     }
                     alt="Seaum Siddiqui"

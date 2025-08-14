@@ -40,7 +40,7 @@ class KeycloakService {
         pkceMethod: 'S256',
         enableLogging: true,
         useNonce: false,
-        redirectUri: window.location.origin,
+        redirectUri: window.location.href,
         flow: 'standard'
       });
 
