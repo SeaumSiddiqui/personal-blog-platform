@@ -128,7 +128,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <div className="relative">
               <div className={`relative w-80 h-80 border-4 overflow-hidden transition-all duration-500 transform hover:scale-105 ${
                 isDarkMode 
-                  ? 'border-[#c5bbb8] shadow-2xl' 
+                  ? 'border-[#c5bbb8] shadow-2xl'
                   : 'border-gray-700 shadow-2xl'
               }`} style={{
                 clipPath: 'polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))',
@@ -151,14 +151,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     }}
                   />
                   
-                  {/* Pixelated overlay effect */}
+                  {/* Pixelated overlay effect
                   <div className={`absolute inset-0 transition-opacity duration-500 ${
                     isDarkMode 
                       ? 'bg-gradient-to-t from-black/40 via-transparent to-[#c5bbb8]/20' 
                       : 'bg-gradient-to-t from-gray-900/40 via-transparent to-gray-700/20'
                   }`} />
                   
-                  {/* Scanline effect */}
+                  Scanline effect 
                   <div className="absolute inset-0 opacity-20" style={{
                     background: `repeating-linear-gradient(
                       0deg,
@@ -167,7 +167,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                       ${isDarkMode ? '#c5bbb8' : '#000'} 2px,
                       ${isDarkMode ? '#c5bbb8' : '#000'} 4px
                     )`
-                  }} />
+                  }} /> */}
                 </div>
               </div>
               
