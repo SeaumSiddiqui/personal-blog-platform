@@ -79,7 +79,7 @@ const CardShareButton: React.FC<{ title: string; url: string; description?: stri
       <button
         ref={buttonRef}
         onClick={handleToggleMenu}
-        className="p-2 rounded-lg transition-colors duration-200 hover:bg-gray-100 text-gray-500 hover:text-gray-700 dark:hover:bg-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+        className="p-2 rounded-lg transition-colors duration-200 hover:bg-light-border text-light-text-secondary hover:text-light-text dark:hover:bg-dark-border dark:text-dark-text-secondary dark:hover:text-dark-text"
         title="Share post"
       >
         <Share2 className="w-4 h-4" />
@@ -89,16 +89,16 @@ const CardShareButton: React.FC<{ title: string; url: string; description?: stri
       {showShareMenu && (
         <Portal>
           {/* Backdrop */}
-          <div 
+          <div
             className="fixed inset-0"
             style={{ zIndex: 1000 }}
             onClick={() => setShowShareMenu(false)}
           />
-          
+
           {/* Menu positioned absolutely */}
-          <div 
-            className="w-56 rounded-lg shadow-xl border bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700"
-            style={{ 
+          <div
+            className="w-56 rounded-lg shadow-xl border bg-light-card border-light-border dark:bg-dark-card dark:border-dark-border"
+            style={{
               position: 'absolute',
               top: `${menuPosition.top}px`,
               left: `${menuPosition.left}px`,
@@ -106,32 +106,32 @@ const CardShareButton: React.FC<{ title: string; url: string; description?: stri
             }}
           >
             <div className="p-3">
-              <h3 className="text-sm font-medium mb-3 text-gray-900 dark:text-white">
+              <h3 className="text-sm font-medium mb-3 text-light-text dark:text-dark-text">
                 Share this post
               </h3>
-              
+
               {/* Social share buttons */}
               <div className="space-y-1 mb-3">
                 {shareOptions.map((option) => (
                   <button
                     key={option.name}
                     onClick={() => handleShare(option.url)}
-                    className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors duration-200 text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                    className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors duration-200 text-light-text hover:bg-light-border dark:text-dark-text dark:hover:bg-dark-border"
                   >
                     <option.icon className="w-4 h-4" />
                     <span>Share on {option.name}</span>
                   </button>
                 ))}
               </div>
-              
+
               {/* Copy link */}
-              <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+              <div className="pt-2 border-t border-light-border dark:border-dark-border">
                 <button
                   onClick={handleCopyLink}
                   className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-sm transition-colors duration-200 ${
                     copied
                       ? 'text-green-600 dark:text-green-400'
-                      : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
+                      : 'text-light-text hover:bg-light-border dark:text-dark-text dark:hover:bg-dark-border'
                   }`}
                 >
                   {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
@@ -162,16 +162,16 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode, onDelete }) 
 
   if (viewMode === 'list') {
     return (
-      <div className="group p-6 rounded-xl shadow-sm border transition-all duration-300 hover:shadow-md hover:scale-[1.01] bg-white/70 border-gray-200 hover:bg-white/90 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-800/70">
+      <div className="group p-6 rounded-xl shadow-md border transition-all duration-300 hover:shadow-xl hover:scale-[1.01] hover:border-primary-400/50 bg-light-card border-light-border hover:shadow-primary-500/20 dark:bg-dark-card dark:border-dark-border dark:hover:border-primary-500/50 dark:hover:shadow-primary-500/30">
         <div className="flex gap-6">
           {/* Banner Image */}
           {post.coverURL && (
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 overflow-hidden rounded-lg">
               <Link to={`/post/${post.id}`}>
                 <img
                   src={post.coverURL}
                   alt={post.title}
-                  className="w-48 h-32 object-cover rounded-lg border border-gray-200 dark:border-gray-700 group-hover:scale-105 transition-transform duration-300"
+                  className="w-48 h-32 object-cover rounded-lg border border-light-border dark:border-dark-border group-hover:scale-110 transition-transform duration-500"
                 />
               </Link>
             </div>
@@ -181,13 +181,13 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode, onDelete }) 
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <Link to={`/post/${post.id}`}>
-                  <h3 className="text-xl font-bold mb-3 line-clamp-2 hover:text-blue-500 transition-colors duration-200 text-gray-900 dark:text-white">
+                  <h3 className="text-xl font-bold mb-3 line-clamp-2 hover:text-primary-500 dark:hover:text-primary-400 transition-colors duration-200 text-light-text dark:text-dark-text">
                     {post.title}
                   </h3>
                 </Link>
-                
+
                 {post.description && (
-                  <p className="text-sm mb-4 line-clamp-2 text-gray-600 dark:text-gray-300">
+                  <p className="text-sm mb-4 line-clamp-2 text-light-text-secondary dark:text-dark-text-secondary">
                     {post.description}
                   </p>
                 )}
@@ -197,17 +197,17 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode, onDelete }) 
                   {/* Tags */}
                   {post.tags && post.tags.length > 0 && (
                     <div className="flex items-center flex-wrap gap-2">
-                      <Tag className="w-3 h-3 text-gray-400" />
+                      <Tag className="w-3 h-3 text-light-text-secondary dark:text-dark-text-secondary" />
                       {post.tags.slice(0, 4).map((tag, index) => (
                         <span
                           key={index}
-                          className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
+                          className="px-2 py-1 text-xs rounded-full bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300"
                         >
                           {tag}
                         </span>
                       ))}
                       {post.tags.length > 4 && (
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                        <span className="text-xs text-light-text-secondary dark:text-dark-text-secondary">
                           +{post.tags.length - 4} more
                         </span>
                       )}
@@ -225,23 +225,23 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode, onDelete }) 
                 </div>
 
                 {/* Separator */}
-                <hr className="my-4 border-gray-200 dark:border-gray-700" />
-                
+                <hr className="my-4 border-light-border dark:border-dark-border" />
+
                 {/* Meta information */}
                 <div className="flex items-center justify-between text-sm">
                   <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-2 text-gray-500 dark:text-gray-400">
+                    <div className="flex items-center space-x-2 text-light-text-secondary dark:text-dark-text-secondary">
                       <User className="w-4 h-4" />
                       <span>{post.author}</span>
                     </div>
                   </div>
-                  
-                  <div className="flex items-center space-x-4 text-gray-500 dark:text-gray-400">
+
+                  <div className="flex items-center space-x-4 text-light-text-secondary dark:text-dark-text-secondary">
                     <div className="flex items-center space-x-2">
                       <Calendar className="w-4 h-4" />
                       <span>{formatDate(createdDate)}</span>
                     </div>
-                    
+
                     {updatedDate !== createdDate && (
                       <div className="flex items-center space-x-2">
                         <Clock className="w-4 h-4" />
@@ -267,7 +267,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode, onDelete }) 
   }
 
   return (
-    <div className="group rounded-xl shadow-sm border transition-all duration-300 hover:shadow-lg hover:scale-[1.02] bg-white/70 border-gray-200 hover:bg-white/90 dark:bg-gray-800/50 dark:border-gray-700 dark:hover:bg-gray-800/70 h-fit overflow-hidden">
+    <div className="group rounded-xl shadow-md border transition-all duration-300 hover:shadow-xl hover:scale-[1.03] hover:border-primary-400/50 hover:shadow-primary-500/20 bg-light-card border-light-border dark:bg-dark-card dark:border-dark-border dark:hover:border-primary-500/50 dark:hover:shadow-primary-500/30 h-fit overflow-hidden">
       <div className="h-full flex flex-col">
         {/* Banner Image */}
         {post.coverURL && (
@@ -279,29 +279,29 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode, onDelete }) 
                 className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
               />
             </Link>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
         )}
         
         <div className="p-5 flex-1 flex flex-col">
           <div className="flex items-start justify-between mb-3">
             <Link to={`/post/${post.id}`} className="flex-1">
-              <h3 className="text-lg font-bold line-clamp-2 group-hover:text-blue-500 transition-colors duration-200 text-gray-900 dark:text-white">
+              <h3 className="text-lg font-bold line-clamp-2 group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors duration-200 text-light-text dark:text-dark-text">
                 {post.title}
               </h3>
             </Link>
-            
+
             <div className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-              <BlogActionsMenu 
-                blogId={post.id} 
+              <BlogActionsMenu
+                blogId={post.id}
                 onDelete={onDelete}
                 showReadOption={true}
               />
             </div>
           </div>
-          
+
           {post.description && (
-            <p className="text-sm mb-3 line-clamp-2 flex-1 text-gray-600 dark:text-gray-300">
+            <p className="text-sm mb-3 line-clamp-2 flex-1 text-light-text-secondary dark:text-dark-text-secondary">
               {post.description}
             </p>
           )}
@@ -311,17 +311,17 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode, onDelete }) 
             {/* Tags */}
             {post.tags && post.tags.length > 0 && (
               <div className="flex items-center flex-wrap gap-1">
-                <Tag className="w-3 h-3 text-gray-400" />
+                <Tag className="w-3 h-3 text-light-text-secondary dark:text-dark-text-secondary" />
                 {post.tags.slice(0, 2).map((tag, index) => (
                   <span
                     key={index}
-                    className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
+                    className="px-2 py-1 text-xs rounded-full bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-300"
                   >
                     {tag}
                   </span>
                 ))}
                 {post.tags.length > 2 && (
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                  <span className="text-xs text-light-text-secondary dark:text-dark-text-secondary">
                     +{post.tags.length - 2}
                   </span>
                 )}
@@ -339,23 +339,23 @@ export const BlogCard: React.FC<BlogCardProps> = ({ post, viewMode, onDelete }) 
           </div>
 
           {/* Separator */}
-          <hr className="my-3 border-gray-200 dark:border-gray-700" />
-          
+          <hr className="my-3 border-light-border dark:border-dark-border" />
+
           {/* Meta information */}
           <div className="space-y-2 mt-auto">
             <div className="flex items-center justify-between text-sm">
-              <div className="flex items-center space-x-2 text-gray-500 dark:text-gray-400">
+              <div className="flex items-center space-x-2 text-light-text-secondary dark:text-dark-text-secondary">
                 <User className="w-4 h-4" />
                 <span className="font-medium">{post.author}</span>
               </div>
             </div>
-            
-            <div className="flex items-center justify-between text-xs text-gray-400 dark:text-gray-500">
+
+            <div className="flex items-center justify-between text-xs text-light-text-secondary dark:text-dark-text-secondary">
               <div className="flex items-center space-x-1">
                 <Calendar className="w-3 h-3" />
                 <span>{formatDate(createdDate)}</span>
               </div>
-              
+
               {updatedDate !== createdDate && (
                 <div className="flex items-center space-x-1">
                   <Clock className="w-3 h-3" />

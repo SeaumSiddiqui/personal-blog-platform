@@ -65,8 +65,8 @@ export const BlogActionsMenu: React.FC<BlogActionsMenuProps> = ({
           onClick={() => setShowMenu(!showMenu)}
           className={`p-2 rounded-lg transition-colors duration-200 ${
             isDarkMode
-              ? 'hover:bg-gray-700 text-gray-400 hover:text-white'
-              : 'hover:bg-gray-100 text-gray-500 hover:text-gray-700'
+              ? 'hover:bg-dark-border text-dark-text-secondary hover:text-dark-text'
+              : 'hover:bg-light-border text-light-text-secondary hover:text-light-text'
           }`}
           title="More options"
         >
@@ -77,16 +77,16 @@ export const BlogActionsMenu: React.FC<BlogActionsMenuProps> = ({
         {showMenu && (
           <>
             {/* Backdrop */}
-            <div 
-              className="fixed inset-0 z-40" 
+            <div
+              className="fixed inset-0 z-40"
               onClick={() => setShowMenu(false)}
             />
-            
+
             {/* Menu */}
             <div className={`absolute right-0 top-full mt-2 w-48 rounded-lg shadow-lg border z-50 ${
               isDarkMode
-                ? 'bg-gray-800 border-gray-700'
-                : 'bg-white border-gray-200'
+                ? 'bg-dark-card border-dark-border'
+                : 'bg-light-card border-light-border'
             }`}>
               <div className="py-2">
                 {showReadOption && (
@@ -94,8 +94,8 @@ export const BlogActionsMenu: React.FC<BlogActionsMenuProps> = ({
                     to={`/post/${blogId}`}
                     className={`flex items-center space-x-3 px-4 py-2 text-sm transition-colors duration-200 ${
                       isDarkMode
-                        ? 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                        : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                        ? 'text-dark-text hover:bg-dark-border hover:text-dark-text'
+                        : 'text-light-text hover:bg-light-border hover:text-light-text'
                     }`}
                     onClick={() => setShowMenu(false)}
                   >
@@ -103,7 +103,7 @@ export const BlogActionsMenu: React.FC<BlogActionsMenuProps> = ({
                     <span>Read Post</span>
                   </Link>
                 )}
-                
+
                 {/* Only show edit/delete for authenticated web-admin users */}
                 {canEditDelete && (
                   <>
@@ -111,19 +111,19 @@ export const BlogActionsMenu: React.FC<BlogActionsMenuProps> = ({
                       to={`/edit/${blogId}`}
                       className={`flex items-center space-x-3 px-4 py-2 text-sm transition-colors duration-200 ${
                         isDarkMode
-                          ? 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                          : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                          ? 'text-dark-text hover:bg-dark-border hover:text-dark-text'
+                          : 'text-light-text hover:bg-light-border hover:text-light-text'
                       }`}
                       onClick={() => setShowMenu(false)}
                     >
                       <Edit className="w-4 h-4" />
                       <span>Edit Post</span>
                     </Link>
-                    
+
                     <div className={`my-1 border-t ${
-                      isDarkMode ? 'border-gray-700' : 'border-gray-200'
+                      isDarkMode ? 'border-dark-border' : 'border-light-border'
                     }`} />
-                    
+
                     <button
                       onClick={() => {
                         setShowMenu(false);
@@ -158,8 +158,8 @@ export const BlogActionsMenu: React.FC<BlogActionsMenuProps> = ({
           {/* Modal */}
           <div className={`relative w-full max-w-md rounded-xl shadow-xl border ${
             isDarkMode
-              ? 'bg-gray-800 border-gray-700'
-              : 'bg-white border-gray-200'
+              ? 'bg-dark-card border-dark-border'
+              : 'bg-light-card border-light-border'
           }`}>
             <div className="p-6">
               <div className="flex items-center space-x-3 mb-4">
@@ -171,18 +171,18 @@ export const BlogActionsMenu: React.FC<BlogActionsMenuProps> = ({
                   }`} />
                 </div>
                 <h3 className={`text-lg font-semibold ${
-                  isDarkMode ? 'text-white' : 'text-gray-900'
+                  isDarkMode ? 'text-dark-text' : 'text-light-text'
                 }`}>
                   Delete Blog Post
                 </h3>
               </div>
-              
+
               <p className={`text-sm mb-6 ${
-                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
               }`}>
                 Are you sure you want to delete this blog post? This action cannot be undone and will permanently remove the post and all its content.
               </p>
-              
+
               <div className="flex items-center justify-end space-x-3">
                 <button
                   onClick={() => setShowDeleteConfirm(false)}
@@ -191,13 +191,13 @@ export const BlogActionsMenu: React.FC<BlogActionsMenuProps> = ({
                     deleting
                       ? 'opacity-50 cursor-not-allowed'
                       : isDarkMode
-                      ? 'text-gray-300 hover:bg-gray-700'
-                      : 'text-gray-700 hover:bg-gray-100'
+                      ? 'text-dark-text hover:bg-dark-border'
+                      : 'text-light-text hover:bg-light-border'
                   }`}
                 >
                   Cancel
                 </button>
-                
+
                 <button
                   onClick={handleDelete}
                   disabled={deleting}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { useTheme } from '../hooks/useTheme';
 import { useAuth } from '../hooks/useAuth';
 import { BlogPost as BlogPostType } from '../types/blog';
@@ -105,9 +106,9 @@ export const BlogPost: React.FC = () => {
   if (loading) {
     return (
       <div className={`min-h-screen flex items-center justify-center transition-colors duration-300 ${
-        isDarkMode 
-          ? 'bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155]' 
-          : 'bg-gradient-to-br from-[#f8fafc] via-[#f1f5f9] to-[#e2e8f0]'
+        isDarkMode
+          ? 'bg-dark-bg'
+          : 'bg-light-bg'
       }`}>
         <LoadingSpinner isDarkMode={isDarkMode} />
       </div>
@@ -117,9 +118,9 @@ export const BlogPost: React.FC = () => {
   if (error || !post) {
     return (
       <div className={`min-h-screen transition-colors duration-300 ${
-        isDarkMode 
-          ? 'bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155]' 
-          : 'bg-gradient-to-br from-[#f8fafc] via-[#f1f5f9] to-[#e2e8f0]'
+        isDarkMode
+          ? 'bg-dark-bg'
+          : 'bg-light-bg'
       }`}>
         {/* Floating Theme Toggle */}
         <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50">
@@ -128,15 +129,15 @@ export const BlogPost: React.FC = () => {
 
         {/* Header */}
         <header className={`sticky top-0 z-40 backdrop-blur-xl border-b transition-colors duration-300 ${
-          isDarkMode 
-            ? 'bg-slate-900/80 border-slate-700' 
-            : 'bg-white/80 border-slate-200'
+          isDarkMode
+            ? 'bg-dark-card/80 border-dark-border'
+            : 'bg-light-card/80 border-light-border'
         }`}>
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-center justify-between h-16">
               <Link
                 to="/blogs"
-                className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                className="text-2xl font-bold bg-gradient-to-r from-primary-500 to-primary-400 bg-clip-text text-transparent"
               >
                 Seaum Siddiqui
               </Link>
@@ -148,8 +149,8 @@ export const BlogPost: React.FC = () => {
                     onClick={login}
                     className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors duration-200 ${
                       isDarkMode
-                        ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                        : 'bg-blue-500 hover:bg-blue-600 text-white'
+                        ? 'bg-primary-500 hover:bg-primary-600 text-white'
+                        : 'bg-primary-400 hover:bg-primary-500 text-white'
                     }`}
                   >
                     <LogIn className="w-4 h-4" />
@@ -169,7 +170,7 @@ export const BlogPost: React.FC = () => {
             <p className="text-sm opacity-80 mb-4">{error}</p>
             <Link
               to="/blogs"
-              className="inline-flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+              className="inline-flex items-center space-x-2 px-4 py-2 bg-primary-400 text-white rounded-lg hover:bg-primary-500 transition-colors dark:bg-primary-500 dark:hover:bg-primary-600"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back to Blog List</span>
@@ -185,10 +186,35 @@ export const BlogPost: React.FC = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155]' 
-        : 'bg-gradient-to-br from-[#f8fafc] via-[#f1f5f9] to-[#e2e8f0]'
+      isDarkMode
+        ? 'bg-dark-bg'
+        : 'bg-light-bg'
     }`}>
+      <Helmet>
+        <title>{post.title} | Seaum Siddiqui</title>
+        <meta name="description" content={post.description || `Read ${post.title} by ${post.author}`} />
+        <meta name="author" content={post.author} />
+
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.description || `Read ${post.title} by ${post.author}`} />
+        <meta property="og:url" content={currentUrl} />
+        {post.coverURL && <meta property="og:image" content={post.coverURL} />}
+        <meta property="og:site_name" content="Seaum Siddiqui" />
+        <meta property="article:author" content={post.author} />
+        <meta property="article:published_time" content={post.createdAt} />
+        {post.lastModifiedAt && <meta property="article:modified_time" content={post.lastModifiedAt} />}
+        {post.tags && post.tags.map((tag, index) => (
+          <meta key={index} property="article:tag" content={tag} />
+        ))}
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@SeaumSiddiqui" />
+        <meta name="twitter:creator" content="@SeaumSiddiqui" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.description || `Read ${post.title} by ${post.author}`} />
+        {post.coverURL && <meta name="twitter:image" content={post.coverURL} />}
+      </Helmet>
       {/* Floating Theme Toggle */}
       <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50">
         <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
@@ -196,9 +222,9 @@ export const BlogPost: React.FC = () => {
 
       {/* Header */}
       <header className={`sticky top-0 z-40 backdrop-blur-xl border-b transition-colors duration-300 ${
-        isDarkMode 
-          ? 'bg-slate-900/80 border-slate-700' 
-          : 'bg-white/80 border-slate-200'
+        isDarkMode
+          ? 'bg-dark-card/80 border-dark-border'
+          : 'bg-light-card/80 border-light-border'
       }`}>
         <div className="flex items-center justify-between h-16 px-6">
           {/* Left-aligned elements */}
@@ -207,25 +233,25 @@ export const BlogPost: React.FC = () => {
               to="/blogs"
               className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors duration-200 ${
                 isDarkMode
-                  ? 'hover:bg-slate-700 text-slate-300'
-                  : 'hover:bg-slate-100 text-slate-600'
+                  ? 'hover:bg-dark-border text-dark-text'
+                  : 'hover:bg-light-border text-light-text'
               }`}
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back</span>
             </Link>
-            
-            <Link to="/blogs" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+
+            <Link to="/blogs" className="text-2xl font-bold bg-gradient-to-r from-primary-500 to-primary-400 bg-clip-text text-transparent">
               Seaum Siddiqui
             </Link>
           </div>
-          
+
           {/* Right-aligned elements */}
           <div className="flex items-center space-x-4">
             {isAuthenticated ? (
               <>
-                <BlogActionsMenu 
-                  blogId={post.id} 
+                <BlogActionsMenu
+                  blogId={post.id}
                   onDelete={handleDelete}
                   showReadOption={false}
                 />
@@ -236,8 +262,8 @@ export const BlogPost: React.FC = () => {
                 onClick={login}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors duration-200 ${
                   isDarkMode
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                    : 'bg-blue-500 hover:bg-blue-600 text-white'
+                    ? 'bg-primary-500 hover:bg-primary-600 text-white'
+                    : 'bg-primary-400 hover:bg-primary-500 text-white'
                 }`}
               >
                 <LogIn className="w-4 h-4" />
@@ -264,14 +290,14 @@ export const BlogPost: React.FC = () => {
         {/* Article Header - Only show title, description, meta, and tags */}
         <div className="mb-12">
           <h1 className={`text-4xl md:text-5xl font-bold mb-6 leading-tight transition-colors duration-300 ${
-            isDarkMode ? 'text-white' : 'text-slate-900'
+            isDarkMode ? 'text-dark-text' : 'text-light-text'
           }`}>
             {post.title}
           </h1>
 
           {post.description && (
             <p className={`text-xl mb-8 leading-relaxed transition-colors duration-300 ${
-              isDarkMode ? 'text-slate-400' : 'text-slate-600'
+              isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
             }`}>
               {post.description}
             </p>
@@ -280,14 +306,14 @@ export const BlogPost: React.FC = () => {
           {/* Meta information */}
           <div className="flex flex-wrap items-center gap-6 text-sm mb-8">
             <div className={`flex items-center space-x-2 transition-colors duration-300 ${
-              isDarkMode ? 'text-slate-400' : 'text-slate-600'
+              isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
             }`}>
               <User className="w-5 h-5" />
               <span className="font-medium">{post.author}</span>
             </div>
 
             <div className={`flex items-center space-x-2 transition-colors duration-300 ${
-              isDarkMode ? 'text-slate-400' : 'text-slate-600'
+              isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
             }`}>
               <Calendar className="w-5 h-5" />
               <span>{formatDate(post.createdAt || post.createdDate || '')}</span>
@@ -295,7 +321,7 @@ export const BlogPost: React.FC = () => {
 
             {readingTime > 0 && (
               <div className={`flex items-center space-x-2 transition-colors duration-300 ${
-                isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
               }`}>
                 <Clock className="w-5 h-5" />
                 <span>{readingTime} min read</span>
@@ -304,7 +330,7 @@ export const BlogPost: React.FC = () => {
 
             {post.lastModifiedAt && post.lastModifiedAt !== post.createdAt && (
               <div className={`flex items-center space-x-2 transition-colors duration-300 ${
-                isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
               }`}>
                 <Clock className="w-5 h-5" />
                 <span>Updated {formatDate(post.lastModifiedAt)}</span>
@@ -318,15 +344,15 @@ export const BlogPost: React.FC = () => {
             {post.tags && post.tags.length > 0 && (
               <div className="flex items-center flex-wrap gap-2">
                 <Tag className={`w-5 h-5 transition-colors duration-300 ${
-                  isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                  isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
                 }`} />
                 {post.tags.map((tag, index) => (
                   <span
                     key={index}
                     className={`px-3 py-1 text-sm rounded-full transition-colors duration-300 ${
                       isDarkMode
-                        ? 'bg-blue-900/30 text-blue-300 border border-blue-700/50'
-                        : 'bg-blue-100 text-blue-800 border border-blue-300'
+                        ? 'bg-primary-900/30 text-primary-300 border border-primary-700/50'
+                        : 'bg-primary-100 text-primary-800 border border-primary-300'
                     }`}
                   >
                     {tag}
@@ -344,7 +370,7 @@ export const BlogPost: React.FC = () => {
           </div>
 
           <hr className={`transition-colors duration-300 ${
-            isDarkMode ? 'border-slate-700' : 'border-slate-200'
+            isDarkMode ? 'border-dark-border' : 'border-light-border'
           }`} />
         </div>
 
@@ -356,33 +382,33 @@ export const BlogPost: React.FC = () => {
         {/* Engagement Actions */}
         <div className={`mt-12 p-6 rounded-2xl border transition-colors duration-300 ${
           isDarkMode
-            ? 'bg-slate-800/50 border-slate-700'
-            : 'bg-white/70 border-slate-200'
+            ? 'bg-dark-card border-dark-border'
+            : 'bg-light-card border-light-border'
         }`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
               <button className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors duration-200 ${
                 isDarkMode
-                  ? 'hover:bg-slate-700 text-slate-300'
-                  : 'hover:bg-slate-100 text-slate-600'
+                  ? 'hover:bg-dark-border text-dark-text'
+                  : 'hover:bg-light-border text-light-text'
               }`}>
                 <Heart className="w-5 h-5" />
                 <span>Like</span>
               </button>
-              
+
               <button className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors duration-200 ${
                 isDarkMode
-                  ? 'hover:bg-slate-700 text-slate-300'
-                  : 'hover:bg-slate-100 text-slate-600'
+                  ? 'hover:bg-dark-border text-dark-text'
+                  : 'hover:bg-light-border text-light-text'
               }`}>
                 <MessageCircle className="w-5 h-5" />
                 <span>Comment</span>
               </button>
-              
+
               <button className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors duration-200 ${
                 isDarkMode
-                  ? 'hover:bg-slate-700 text-slate-300'
-                  : 'hover:bg-slate-100 text-slate-600'
+                  ? 'hover:bg-dark-border text-dark-text'
+                  : 'hover:bg-light-border text-light-text'
               }`}>
                 <Bookmark className="w-5 h-5" />
                 <span>Save</span>
@@ -402,20 +428,20 @@ export const BlogPost: React.FC = () => {
           <div className="mt-12">
             <div className="flex items-center space-x-4 mb-8">
               <div className={`p-4 rounded-xl transition-colors duration-300 ${
-                isDarkMode ? 'bg-gradient-to-br from-purple-900/30 to-blue-900/30' : 'bg-gradient-to-br from-purple-100 to-blue-100'
+                isDarkMode ? 'bg-gradient-to-br from-primary-900/30 to-primary-800/30' : 'bg-gradient-to-br from-primary-100 to-primary-200'
               }`}>
                 <Sparkles className={`w-8 h-8 transition-colors duration-300 ${
-                  isDarkMode ? 'text-purple-400' : 'text-purple-600'
+                  isDarkMode ? 'text-primary-400' : 'text-primary-600'
                 }`} />
               </div>
               <div>
                 <h3 className={`text-2xl font-bold transition-colors duration-300 ${
-                  isDarkMode ? 'text-white' : 'text-slate-900'
+                  isDarkMode ? 'text-dark-text' : 'text-light-text'
                 }`}>
                   Continue Your Journey
                 </h3>
                 <p className={`text-sm transition-colors duration-300 ${
-                  isDarkMode ? 'text-slate-400' : 'text-slate-600'
+                  isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
                 }`}>
                   Discover more insights and expand your knowledge
                 </p>
@@ -431,45 +457,45 @@ export const BlogPost: React.FC = () => {
                   rel="noopener noreferrer"
                   className={`group relative overflow-hidden p-6 rounded-xl border transition-all duration-300 hover:scale-105 hover:shadow-xl ${
                     isDarkMode
-                      ? 'border-slate-700 bg-gradient-to-br from-slate-800/50 to-slate-700/30 hover:from-slate-700/60 hover:to-slate-600/40'
-                      : 'border-slate-200 bg-gradient-to-br from-white to-slate-50 hover:from-blue-50 hover:to-purple-50'
+                      ? 'border-dark-border bg-gradient-to-br from-dark-card to-dark-border/50 hover:from-dark-border hover:to-dark-border/70'
+                      : 'border-light-border bg-gradient-to-br from-light-card to-light-bg hover:from-primary-50 hover:to-primary-100'
                   }`}
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1 min-w-0">
-                      <div className={`text-lg font-semibold truncate group-hover:text-blue-500 transition-colors duration-200 ${
-                        isDarkMode ? 'text-slate-200' : 'text-slate-800'
+                      <div className={`text-lg font-semibold truncate group-hover:text-primary-500 transition-colors duration-200 ${
+                        isDarkMode ? 'text-dark-text' : 'text-light-text'
                       }`}>
                         {extractDomain(url)}
                       </div>
                       <div className={`text-sm truncate mt-2 transition-colors duration-300 ${
-                        isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                        isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
                       }`}>
                         {url.length > 60 ? url.substring(0, 60) + '...' : url}
                       </div>
                       <div className={`text-sm mt-4 opacity-0 group-hover:opacity-100 transition-all duration-200 flex items-center space-x-1 ${
-                        isDarkMode ? 'text-blue-400' : 'text-blue-600'
+                        isDarkMode ? 'text-primary-400' : 'text-primary-600'
                       }`}>
                         <span>Explore this topic</span>
                         <ExternalLink className="w-3 h-3" />
                       </div>
                     </div>
-                    
+
                     <div className={`ml-4 p-2 rounded-lg transition-all duration-200 ${
-                      isDarkMode 
-                        ? 'bg-slate-700/50 group-hover:bg-blue-900/30' 
-                        : 'bg-slate-100 group-hover:bg-blue-100'
+                      isDarkMode
+                        ? 'bg-dark-border/50 group-hover:bg-primary-900/30'
+                        : 'bg-light-border group-hover:bg-primary-100'
                     }`}>
                       <ExternalLink className={`w-5 h-5 transition-all duration-200 ${
-                        isDarkMode 
-                          ? 'text-slate-400 group-hover:text-blue-400 group-hover:scale-110' 
-                          : 'text-slate-500 group-hover:text-blue-600 group-hover:scale-110'
+                        isDarkMode
+                          ? 'text-dark-text-secondary group-hover:text-primary-400 group-hover:scale-110'
+                          : 'text-light-text-secondary group-hover:text-primary-600 group-hover:scale-110'
                       }`} />
                     </div>
                   </div>
-                  
+
                   {/* Hover effect overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-primary-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
                 </a>
               ))}
             </div>

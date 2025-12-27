@@ -16,7 +16,21 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('theme');
     if (saved) {
-      return JSON.parse(saved);
+      // Handle both old format (string: "light"/"dark") and new format (boolean)
+      if (saved === 'true' || saved === 'false') {
+        return saved === 'true';
+      }
+      if (saved === '"light"' || saved === '"dark"') {
+        return saved === '"dark"';
+      }
+      if (saved === 'light' || saved === 'dark') {
+        return saved === 'dark';
+      }
+      try {
+        return JSON.parse(saved);
+      } catch {
+        // If parsing fails, fall through to system preference
+      }
     }
     // Check system preference
     return window.matchMedia('(prefers-color-scheme: dark)').matches;

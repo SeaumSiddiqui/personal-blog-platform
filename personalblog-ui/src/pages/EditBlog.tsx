@@ -142,9 +142,9 @@ export const EditBlog: React.FC = () => {
   if (loading) {
     return (
       <div className={`min-h-screen flex items-center justify-center transition-colors duration-300 ${
-        isDarkMode 
-          ? 'bg-gradient-to-br from-[#29323c] via-[#3a4550] to-[#485563]' 
-          : 'bg-gradient-to-br from-[#fdfbfb] via-[#f4f6f7] to-[#ebedee]'
+        isDarkMode
+          ? 'bg-dark-bg'
+          : 'bg-light-bg'
       }`}>
         <LoadingSpinner isDarkMode={isDarkMode} />
       </div>
@@ -154,9 +154,9 @@ export const EditBlog: React.FC = () => {
   if (error || !initialData) {
     return (
       <div className={`min-h-screen flex items-center justify-center transition-colors duration-300 ${
-        isDarkMode 
-          ? 'bg-gradient-to-br from-[#29323c] via-[#3a4550] to-[#485563]' 
-          : 'bg-gradient-to-br from-[#fdfbfb] via-[#f4f6f7] to-[#ebedee]'
+        isDarkMode
+          ? 'bg-dark-bg'
+          : 'bg-light-bg'
       }`}>
         <div className={`text-center p-8 rounded-xl ${
           isDarkMode ? 'bg-red-900/20 text-red-400' : 'bg-red-50 text-red-600'
@@ -165,7 +165,9 @@ export const EditBlog: React.FC = () => {
           <p className="text-sm mt-2 opacity-80">{error}</p>
           <button
             onClick={() => navigate('/blogs')}
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+            className={`mt-4 px-4 py-2 text-white rounded-lg transition-colors ${
+              isDarkMode ? 'bg-primary-500 hover:bg-primary-600' : 'bg-primary-400 hover:bg-primary-500'
+            }`}
           >
             Back to Blog List
           </button>

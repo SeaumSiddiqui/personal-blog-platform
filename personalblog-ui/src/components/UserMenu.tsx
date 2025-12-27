@@ -21,12 +21,12 @@ export const UserMenu: React.FC = () => {
         onClick={() => setShowMenu(!showMenu)}
         className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors duration-200 ${
           isDarkMode
-            ? 'hover:bg-gray-700 text-gray-300'
-            : 'hover:bg-gray-100 text-gray-700'
+            ? 'hover:bg-dark-border text-dark-text'
+            : 'hover:bg-light-border text-light-text'
         }`}
       >
         <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-          isDarkMode ? 'bg-gray-700' : 'bg-gray-200'
+          isDarkMode ? 'bg-dark-border' : 'bg-light-border'
         }`}>
           <User className="w-4 h-4" />
         </div>
@@ -36,7 +36,7 @@ export const UserMenu: React.FC = () => {
           </div>
           {isWebAdmin() && (
             <div className={`text-xs ${
-              isDarkMode ? 'text-blue-400' : 'text-blue-600'
+              isDarkMode ? 'text-primary-400' : 'text-primary-600'
             }`}>
               Admin
             </div>
@@ -49,32 +49,32 @@ export const UserMenu: React.FC = () => {
       {showMenu && (
         <>
           {/* Backdrop */}
-          <div 
-            className="fixed inset-0 z-40" 
+          <div
+            className="fixed inset-0 z-40"
             onClick={() => setShowMenu(false)}
           />
-          
+
           {/* Menu */}
           <div className={`absolute right-0 top-full mt-2 w-64 rounded-lg shadow-lg border z-50 ${
             isDarkMode
-              ? 'bg-gray-800 border-gray-700'
-              : 'bg-white border-gray-200'
+              ? 'bg-dark-card border-dark-border'
+              : 'bg-light-card border-light-border'
           }`}>
-            <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+            <div className="p-4 border-b border-light-border dark:border-dark-border">
               <div className={`text-sm font-medium ${
-                isDarkMode ? 'text-white' : 'text-gray-900'
+                isDarkMode ? 'text-dark-text' : 'text-light-text'
               }`}>
-                {user.firstName && user.lastName 
+                {user.firstName && user.lastName
                   ? `${user.firstName} ${user.lastName}`
                   : user.username
                 }
               </div>
               <div className={`text-xs ${
-                isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
               }`}>
                 {user.email}
               </div>
-              
+
               {/* Roles */}
               {user.roles.length > 0 && (
                 <div className="mt-2 flex flex-wrap gap-1">
@@ -84,11 +84,11 @@ export const UserMenu: React.FC = () => {
                       className={`inline-flex items-center space-x-1 px-2 py-1 text-xs rounded-full ${
                         role === 'web-admin'
                           ? isDarkMode
-                            ? 'bg-blue-900/30 text-blue-400'
-                            : 'bg-blue-100 text-blue-700'
+                            ? 'bg-primary-900/30 text-primary-400'
+                            : 'bg-primary-100 text-primary-700'
                           : isDarkMode
-                          ? 'bg-gray-700 text-gray-300'
-                          : 'bg-gray-100 text-gray-700'
+                          ? 'bg-dark-border text-dark-text'
+                          : 'bg-light-border text-light-text'
                       }`}
                     >
                       {role === 'web-admin' && <Shield className="w-3 h-3" />}
@@ -98,7 +98,7 @@ export const UserMenu: React.FC = () => {
                 </div>
               )}
             </div>
-            
+
             <div className="py-2">
               <button
                 onClick={handleLogout}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ArrowUp } from 'lucide-react';
 
 interface ScrollControlsProps {
@@ -12,64 +12,27 @@ export const ScrollControls: React.FC<ScrollControlsProps> = ({
   showScrollTop,
   scrollToTop
 }) => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    const updateScrollProgress = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setScrollProgress(Math.min(100, Math.max(0, scrollPercent)));
-    };
-
-    // Update on mount
-    updateScrollProgress();
-
-    // Add scroll listener
-    window.addEventListener('scroll', updateScrollProgress, { passive: true });
-    
-    // Also update on resize in case content height changes
-    window.addEventListener('resize', updateScrollProgress, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', updateScrollProgress);
-      window.removeEventListener('resize', updateScrollProgress);
-    };
-  }, []);
-
   return (
     <>
-      {/* Scroll to Top Button */}
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className={`fixed bottom-8 right-8 p-3 border-2 shadow-lg transition-all duration-300 hover:scale-110 z-40 ${
-            isDarkMode
-              ? 'bg-black text-[#c5bbb8] border-[#c5bbb8] hover:bg-[#c5bbb8] hover:text-black'
-              : 'bg-white text-gray-700 border-gray-700 hover:bg-gray-700 hover:text-white shadow-xl'
-          }`} style={{
-            clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))'
-          }}>
-          <ArrowUp className="w-5 h-5" />
+          className={`
+            fixed bottom-6 left-6 w-12 h-12 rounded-full border-2 transition-all duration-300
+            flex items-center justify-center transform hover:scale-110 hover:shadow-lg backdrop-blur-sm z-40
+            ${isDarkMode
+              ? 'border-stone-600/50 bg-stone-800/50 hover:border-primary-400/70 hover:bg-primary-500/20'
+              : 'border-grey-300/60 bg-white/80 hover:border-primary-500/70 hover:bg-primary-500/10 shadow-lg'
+            }
+          `}
+          title="Scroll to top"
+        >
+          <ArrowUp className={`w-5 h-5 transition-colors duration-300 ${
+            isDarkMode ? 'text-stone-300' : 'text-grey-600'
+          }`} />
+          <div className="absolute inset-0 rounded-full bg-primary-500 opacity-0 hover:opacity-10 transition-opacity duration-300" />
         </button>
       )}
-
-      {/* Scroll Progress Indicator */}
-      <div className={`fixed bottom-0 left-0 w-full h-1 z-50 border-t-2 ${
-        isDarkMode ? 'bg-black border-[#c5bbb8]' : 'bg-white border-gray-700'
-      }`}>
-        <div 
-          className={`h-full transition-all duration-150 ease-out ${
-            isDarkMode 
-              ? 'bg-[#c5bbb8]' 
-              : 'bg-gray-700'
-          }`}
-          style={{ 
-            width: `${scrollProgress}%`,
-            imageRendering: 'pixelated'
-          }}
-        />
-      </div>
     </>
   );
 };

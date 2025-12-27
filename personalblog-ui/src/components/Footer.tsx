@@ -19,9 +19,9 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className={`mt-20 border-t transition-colors duration-300 ${
-      isDarkMode 
-        ? 'bg-slate-900/50 border-slate-700' 
-        : 'bg-white/50 border-slate-200'
+      isDarkMode
+        ? 'bg-dark-card border-dark-border'
+        : 'bg-light-card border-light-border'
     }`}>
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -29,12 +29,12 @@ export const Footer: React.FC = () => {
           <div className="lg:col-span-2 ml-10">
             <div className="mb-8">
               <h2 className={`text-4xl font-bold mb-4 transition-colors duration-300 ${
-                isDarkMode ? 'text-white' : 'text-slate-900'
+                isDarkMode ? 'text-dark-text' : 'text-light-text'
               }`}>
                 Seaum Siddiqui
               </h2>
               <p className={`text-lg leading-relaxed transition-colors duration-300 ${
-                isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
               }`}>
                 Backend Spring Boot Developer passionate about building scalable, 
                 robust applications and sharing knowledge through technical writing. 
@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
               {/* Skills */}
               <div>
                 <h3 className={`text-lg font-semibold mb-4 flex items-center space-x-2 transition-colors duration-300 ${
-                  isDarkMode ? 'text-white' : 'text-slate-900'
+                  isDarkMode ? 'text-dark-text' : 'text-light-text'
                 }`}>
                   <Code className="w-5 h-5" />
                   <span>Tech Stack</span>
@@ -61,8 +61,8 @@ export const Footer: React.FC = () => {
                       key={index}
                       className={`px-3 py-1 text-sm rounded-full transition-colors duration-300 ${
                         isDarkMode
-                          ? 'bg-blue-900/30 text-blue-300 border border-blue-700/50'
-                          : 'bg-blue-100 text-blue-800 border border-blue-300'
+                          ? 'bg-primary-900/30 text-primary-300 border border-primary-700/50'
+                          : 'bg-primary-100 text-primary-800 border border-primary-300'
                       }`}
                     >
                       {tech}
@@ -74,7 +74,7 @@ export const Footer: React.FC = () => {
               {/* Contact */}
               <div>
                 <h3 className={`text-lg font-semibold mb-4 transition-colors duration-300 ${
-                  isDarkMode ? 'text-white' : 'text-slate-900'
+                  isDarkMode ? 'text-dark-text' : 'text-light-text'
                 }`}>
                   Get In Touch
                 </h3>
@@ -83,8 +83,8 @@ export const Footer: React.FC = () => {
                     href="mailto:seaum.siddiqui@example.com"
                     className={`flex items-center space-x-3 transition-colors duration-200 ${
                       isDarkMode
-                        ? 'text-slate-300 hover:text-blue-400'
-                        : 'text-slate-600 hover:text-blue-600'
+                        ? 'text-dark-text-secondary hover:text-primary-400'
+                        : 'text-light-text-secondary hover:text-primary-600'
                     }`}
                   >
                     <Mail className="w-4 h-4" />
@@ -97,8 +97,8 @@ export const Footer: React.FC = () => {
                     rel="noopener noreferrer"
                     className={`flex items-center space-x-3 transition-colors duration-200 ${
                       isDarkMode
-                        ? 'text-slate-300 hover:text-blue-400'
-                        : 'text-slate-600 hover:text-blue-600'
+                        ? 'text-dark-text-secondary hover:text-primary-400'
+                        : 'text-light-text-secondary hover:text-primary-600'
                     }`}
                   >
                     <Linkedin className="w-4 h-4" />
@@ -112,8 +112,8 @@ export const Footer: React.FC = () => {
                     rel="noopener noreferrer"
                     className={`flex items-center space-x-3 transition-colors duration-200 ${
                       isDarkMode
-                        ? 'text-slate-300 hover:text-blue-400'
-                        : 'text-slate-600 hover:text-blue-600'
+                        ? 'text-dark-text-secondary hover:text-primary-400'
+                        : 'text-light-text-secondary hover:text-primary-600'
                     }`}
                   >
                     <Github className="w-4 h-4" />
@@ -122,7 +122,7 @@ export const Footer: React.FC = () => {
                   </a>
                   
                   <div className={`flex items-center space-x-3 transition-colors duration-300 ${
-                    isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                    isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
                   }`}>
                     <MapPin className="w-4 h-4" />
                     <span>Available for Remote Work</span>
@@ -135,7 +135,7 @@ export const Footer: React.FC = () => {
           {/* Quick Links */}
           <div>
             <h3 className={`text-lg font-semibold mb-6 transition-colors duration-300 ${
-              isDarkMode ? 'text-white' : 'text-slate-900'
+              isDarkMode ? 'text-dark-text' : 'text-light-text'
             }`}>
               Quick Links
             </h3>
@@ -144,8 +144,8 @@ export const Footer: React.FC = () => {
                 to="/blogs"
                 className={`block transition-colors duration-200 ${
                   isDarkMode
-                    ? 'text-slate-300 hover:text-blue-400'
-                    : 'text-slate-600 hover:text-blue-600'
+                    ? 'text-dark-text-secondary hover:text-primary-400'
+                    : 'text-light-text-secondary hover:text-primary-600'
                 }`}
               >
                 Blogs
@@ -155,8 +155,8 @@ export const Footer: React.FC = () => {
                 to="/about"
                 className={`block transition-colors duration-200 ${
                   isDarkMode
-                    ? 'text-slate-300 hover:text-blue-400'
-                    : 'text-slate-600 hover:text-blue-600'
+                    ? 'text-dark-text-secondary hover:text-primary-400'
+                    : 'text-light-text-secondary hover:text-primary-600'
                 }`}
               >
                 About Me
@@ -166,8 +166,8 @@ export const Footer: React.FC = () => {
                 href="#"
                 className={`block transition-colors duration-200 ${
                   isDarkMode
-                    ? 'text-slate-300 hover:text-blue-400'
-                    : 'text-slate-600 hover:text-blue-600'
+                    ? 'text-dark-text-secondary hover:text-primary-400'
+                    : 'text-light-text-secondary hover:text-primary-600'
                 }`}
               >
                 Resume / CV
@@ -177,8 +177,8 @@ export const Footer: React.FC = () => {
                 href="/"
                 className={`block transition-colors duration-200 ${
                   isDarkMode
-                    ? 'text-slate-300 hover:text-blue-400'
-                    : 'text-slate-600 hover:text-blue-600'
+                    ? 'text-dark-text-secondary hover:text-primary-400'
+                    : 'text-light-text-secondary hover:text-primary-600'
                 }`}
               >
                 Portfolio
@@ -188,16 +188,16 @@ export const Footer: React.FC = () => {
             {/* Fun Section */}
             <div className="mt-8">
               <div className={`p-4 rounded-lg transition-colors duration-300 ${
-                isDarkMode ? 'bg-slate-800/50' : 'bg-slate-100/50'
+                isDarkMode ? 'bg-dark-border' : 'bg-light-border'
               }`}>
                 <div className={`flex items-center space-x-2 mb-2 transition-colors duration-300 ${
-                  isDarkMode ? 'text-slate-300' : 'text-slate-600'
+                  isDarkMode ? 'text-dark-text' : 'text-light-text'
                 }`}>
                   <Coffee className="w-4 h-4" />
                   <span className="text-sm font-medium">Powered by</span>
                 </div>
                 <p className={`text-sm transition-colors duration-300 ${
-                  isDarkMode ? 'text-slate-400' : 'text-slate-500'
+                  isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
                 }`}>
                   Countless cups of coffee, late-night coding sessions, and a passion for clean code.
                 </p>
@@ -208,23 +208,23 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Section */}
         <div className={`mt-12 ml-10 pt-8 border-t transition-colors duration-300 ${
-          isDarkMode ? 'border-slate-700' : 'border-slate-200'
+          isDarkMode ? 'border-dark-border' : 'border-light-border'
         }`}>
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <div className={`flex items-center space-x-2 text-sm transition-colors duration-300 ${
-              isDarkMode ? 'text-slate-400' : 'text-slate-500'
+              isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
             }`}>
               <span>© {currentYear} Seaum Siddiqui. Made with</span>
               <Heart className="w-4 h-4 text-red-500" />
               <span>and Spring Boot</span>
             </div>
-            
+
             <div className={`text-sm transition-colors duration-300 ${
-              isDarkMode ? 'text-slate-400' : 'text-slate-500'
+              isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
             }`}>
               <Link
                 to="/"
-                className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                className="text-2xl font-bold bg-gradient-to-r from-primary-500 to-primary-400 bg-clip-text text-transparent"
               >
                 Seaum Siddiqui
               </Link>

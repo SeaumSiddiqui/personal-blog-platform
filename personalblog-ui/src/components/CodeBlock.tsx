@@ -200,12 +200,14 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ code, language }) => {
 
   return (
     <div className={`relative group rounded-xl overflow-hidden my-6 shadow-lg border transition-all duration-300 ${
-      isDarkMode 
-        ? 'bg-gray-900 border-gray-700 shadow-gray-900/50' 
-        : 'bg-gray-900 border-gray-700 shadow-xl'
+      isDarkMode
+        ? 'bg-dark-card border-dark-border shadow-dark-card/50'
+        : 'bg-dark-card border-dark-border shadow-xl'
     }`}>
       {/* Console-like header */}
-      <div className="flex items-center justify-between px-4 py-3 bg-gray-800 border-b border-gray-700">
+      <div className={`flex items-center justify-between px-4 py-3 border-b transition-colors duration-300 ${
+        isDarkMode ? 'bg-dark-bg border-dark-border' : 'bg-dark-bg border-dark-border'
+      }`}>
         <div className="flex items-center space-x-3">
           {/* Terminal dots */}
           <div className="flex items-center space-x-2">
@@ -213,23 +215,29 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ code, language }) => {
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
             <div className="w-3 h-3 rounded-full bg-green-500"></div>
           </div>
-          
+
           {/* Language indicator */}
           <div className="flex items-center space-x-2">
-            <Terminal className="w-4 h-4 text-gray-400" />
-            <span className="text-sm font-medium text-gray-300">
+            <Terminal className={`w-4 h-4 transition-colors duration-300 ${
+              isDarkMode ? 'text-dark-text-secondary' : 'text-dark-text-secondary'
+            }`} />
+            <span className={`text-sm font-medium transition-colors duration-300 ${
+              isDarkMode ? 'text-dark-text' : 'text-dark-text'
+            }`}>
               {getLanguageDisplayName(language)}
             </span>
           </div>
         </div>
-        
+
         {/* Copy button */}
         <button
           onClick={handleCopy}
           className={`flex items-center space-x-2 px-3 py-1.5 rounded-lg text-sm transition-all duration-200 ${
             copied
               ? 'bg-green-600 text-white'
-              : 'bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white'
+              : isDarkMode
+              ? 'bg-dark-border hover:bg-dark-border/70 text-dark-text hover:text-white'
+              : 'bg-dark-border hover:bg-dark-border/70 text-dark-text hover:text-white'
           }`}
           title={copied ? 'Copied!' : 'Copy code'}
         >
@@ -241,20 +249,26 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ code, language }) => {
       {/* Code content with console styling */}
       <div className="relative">
         {/* Line numbers background */}
-        <div className="absolute left-0 top-0 bottom-0 w-12 bg-gray-800/50 border-r border-gray-700"></div>
-        
+        <div className={`absolute left-0 top-0 bottom-0 w-12 border-r transition-colors duration-300 ${
+          isDarkMode ? 'bg-dark-bg/50 border-dark-border' : 'bg-dark-bg/50 border-dark-border'
+        }`}></div>
+
         {/* Code content */}
         <div className="overflow-x-auto">
-          <pre className="p-4 pl-16 text-sm leading-relaxed font-mono text-gray-100 min-h-[3rem]">
+          <pre className={`p-4 pl-16 text-sm leading-relaxed font-mono min-h-[3rem] transition-colors duration-300 ${
+            isDarkMode ? 'text-dark-text' : 'text-dark-text'
+          }`}>
             {/* Line numbers */}
-            <div className="absolute left-0 top-4 bottom-4 w-12 flex flex-col text-xs text-gray-500 select-none">
+            <div className={`absolute left-0 top-4 bottom-4 w-12 flex flex-col text-xs select-none transition-colors duration-300 ${
+              isDarkMode ? 'text-dark-text-secondary' : 'text-dark-text-secondary'
+            }`}>
               {code.split('\n').map((_, index) => (
                 <div key={index} className="h-[1.375rem] flex items-center justify-end pr-3">
                   {index + 1}
                 </div>
               ))}
             </div>
-            
+
             {/* Actual code */}
             <code
               className="block"
@@ -264,13 +278,15 @@ export const CodeBlock: React.FC<CodeBlockProps> = ({ code, language }) => {
             />
           </pre>
         </div>
-        
+
         {/* Subtle gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-gray-900/10 pointer-events-none"></div>
+        <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-transparent pointer-events-none transition-colors duration-300 ${
+          isDarkMode ? 'to-dark-card/10' : 'to-dark-card/10'
+        }`}></div>
       </div>
-      
+
       {/* Bottom border for console effect */}
-      <div className="h-1 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20"></div>
+      <div className="h-1 bg-gradient-to-r from-primary-500/20 via-primary-400/20 to-primary-300/20"></div>
     </div>
   );
 };

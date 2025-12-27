@@ -47,15 +47,15 @@ export const Pagination: React.FC<PaginationProps> = ({
 
   const buttonClass = (isActive: boolean = false, isDisabled: boolean = false) => `
     flex items-center justify-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200
-    ${isActive 
-      ? 'bg-blue-500 text-white shadow-md' 
+    ${isActive
+      ? 'bg-primary-400 text-white shadow-md dark:bg-primary-500'
       : isDisabled
-      ? isDarkMode 
-        ? 'text-gray-600 cursor-not-allowed' 
-        : 'text-gray-400 cursor-not-allowed'
+      ? isDarkMode
+        ? 'text-dark-text-secondary cursor-not-allowed'
+        : 'text-light-text-secondary cursor-not-allowed'
       : isDarkMode
-      ? 'text-gray-300 hover:text-white hover:bg-gray-700'
-      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
+      ? 'text-dark-text hover:text-dark-text hover:bg-dark-border'
+      : 'text-light-text hover:text-light-text hover:bg-light-border'
     }
   `;
 
@@ -77,7 +77,7 @@ export const Pagination: React.FC<PaginationProps> = ({
           <React.Fragment key={index}>
             {page === '...' ? (
               <div className={`flex items-center justify-center px-3 py-2 ${
-                isDarkMode ? 'text-gray-500' : 'text-gray-400'
+                isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
               }`}>
                 <MoreHorizontal className="w-4 h-4" />
               </div>

@@ -58,9 +58,9 @@ export const Home: React.FC = () => {
   if (authLoading) {
     return (
       <div className={`min-h-screen flex items-center justify-center transition-colors duration-300 ${
-        isDarkMode 
-          ? 'bg-gradient-to-br from-[#29323c] via-[#3a4550] to-[#485563]' 
-          : 'bg-gradient-to-br from-[#fdfbfb] via-[#f4f6f7] to-[#ebedee]'
+        isDarkMode
+          ? 'bg-dark-bg'
+          : 'bg-light-bg'
       }`}>
         <LoadingSpinner isDarkMode={isDarkMode} />
       </div>
@@ -69,20 +69,20 @@ export const Home: React.FC = () => {
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-[#29323c] via-[#3a4550] to-[#485563]' 
-        : 'bg-gradient-to-br from-[#fdfbfb] via-[#f4f6f7] to-[#ebedee]'
+      isDarkMode
+        ? 'bg-dark-bg'
+        : 'bg-light-bg'
     }`}>
       {/* Floating Theme Toggle */}
       <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50">
         <ThemeToggle isDarkMode={isDarkMode} onToggle={toggleTheme} />
       </div>
       {/* Header */}
-      <header className="sticky top-0 z-40 backdrop-blur-md border-b transition-colors duration-300 bg-white/80 border-gray-200 dark:bg-gray-900/80 dark:border-gray-700 w-full">
+      <header className="sticky top-0 z-40 backdrop-blur-md border-b transition-colors duration-300 bg-light-card/80 border-light-border dark:bg-dark-card/80 dark:border-dark-border w-full">
         <div className="flex items-center justify-between h-16 px-6">
           {/* Left side - Logo */}
           <div className="flex items-center space-x-6">
-            <Link to="/blogs" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <Link to="/blogs" className="text-2xl font-bold bg-gradient-to-r from-primary-500 to-primary-400 bg-clip-text text-transparent">
               Seaum Siddiqui
             </Link>
           </div>
@@ -91,19 +91,19 @@ export const Home: React.FC = () => {
           <div className="flex items-center space-x-4">
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="p-2 rounded-lg transition-colors duration-200 hover:bg-gray-100 text-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
+              className="p-2 rounded-lg transition-colors duration-200 hover:bg-light-border text-light-text-secondary dark:hover:bg-dark-border dark:text-dark-text-secondary"
               title="Toggle filters"
             >
               <Settings className="w-5 h-5" />
             </button>
-            
-            <div className="flex items-center space-x-2 border rounded-lg p-1.5 border-gray-300 dark:border-gray-600">
+
+            <div className="flex items-center space-x-2 border rounded-lg p-1.5 border-light-border dark:border-dark-border">
               <button
                 onClick={() => setViewMode('grid')}
                 className={`p-1.5 rounded transition-colors duration-200 ${
                   viewMode === 'grid'
-                    ? 'bg-blue-500 text-white'
-                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                    ? 'bg-primary-400 text-white dark:bg-primary-500'
+                    : 'text-light-text-secondary hover:text-light-text dark:text-dark-text-secondary dark:hover:text-dark-text'
                 }`}
                 title="Grid view"
               >
@@ -113,8 +113,8 @@ export const Home: React.FC = () => {
                 onClick={() => setViewMode('list')}
                 className={`p-1.5 rounded transition-colors duration-200 ${
                   viewMode === 'list'
-                    ? 'bg-blue-500 text-white'
-                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200'
+                    ? 'bg-primary-400 text-white dark:bg-primary-500'
+                    : 'text-light-text-secondary hover:text-light-text dark:text-dark-text-secondary dark:hover:text-dark-text'
                 }`}
                 title="List view"
               >
@@ -129,7 +129,7 @@ export const Home: React.FC = () => {
                 {isWebAdmin() && (
                   <Link
                     to="/create"
-                    className="flex items-center space-x-2 px-4 p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
+                    className="flex items-center space-x-2 px-4 p-2 bg-primary-400 text-white rounded-lg hover:bg-primary-500 transition-colors duration-200 dark:bg-primary-500 dark:hover:bg-primary-600"
                   >
                     <Plus className="w-4 h-4" />
                     <span className="hidden sm:inline">New Post</span>
@@ -140,7 +140,7 @@ export const Home: React.FC = () => {
             ) : (
               <button
                 onClick={login}
-                className="flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors duration-200 bg-blue-500 hover:bg-blue-600 text-white dark:bg-blue-600 dark:hover:bg-blue-700"
+                className="flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors duration-200 bg-primary-400 hover:bg-primary-500 text-white dark:bg-primary-500 dark:hover:bg-primary-600"
               >
                 <LogIn className="w-4 h-4" />
                 <span className="hidden sm:inline">Sign In</span>
@@ -167,7 +167,7 @@ export const Home: React.FC = () => {
           {/* Main Content */}
           <div className="flex-1">
             {/* Search and Sort Controls */}
-            <div className="mb-8 p-6 rounded-xl shadow-sm border transition-colors duration-300 bg-white/70 border-gray-200 dark:bg-gray-800/50 dark:border-gray-700">
+            <div className="mb-8 p-6 rounded-xl shadow-sm border transition-colors duration-300 bg-light-card border-light-border dark:bg-dark-card dark:border-dark-border">
               <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
                 {/* Search */}
                 <div className="relative flex-1 max-w-md">
@@ -177,13 +177,13 @@ export const Home: React.FC = () => {
                     placeholder="Search posts..."
                     value={filters.title}
                     onChange={(e) => handleFilterChange({ title: e.target.value })}
-                    className="w-full pl-10 pr-4 py-2.5 rounded-lg border transition-colors duration-200 bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    className="w-full pl-10 pr-4 py-2.5 rounded-lg border transition-colors duration-200 bg-light-card border-light-border text-light-text placeholder-light-text-secondary focus:border-primary-400 dark:bg-dark-bg dark:border-dark-border dark:text-dark-text dark:placeholder-dark-text-secondary dark:focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-400/20"
                   />
                 </div>
 
                 {/* Sort Controls */}
                 <div className="flex items-center space-x-3">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <span className="text-sm font-medium text-light-text dark:text-dark-text">
                     Sort by:
                   </span>
                   <div className="flex space-x-2">
@@ -197,14 +197,14 @@ export const Home: React.FC = () => {
                         onClick={() => handleSortChange(field)}
                         className={`flex items-center space-x-1 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200 ${
                           filters.sortField === field
-                            ? 'bg-blue-500 text-white'
-                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                            ? 'bg-primary-400 text-white dark:bg-primary-500'
+                            : 'bg-light-border text-light-text hover:bg-light-border/70 dark:bg-dark-border dark:text-dark-text dark:hover:bg-dark-border/70'
                         }`}
                       >
                         <span>{label}</span>
                         {filters.sortField === field && (
-                          filters.sortDirection === 'asc' ? 
-                            <SortAsc className="w-4 h-4" /> : 
+                          filters.sortDirection === 'asc' ?
+                            <SortAsc className="w-4 h-4" /> :
                             <SortDesc className="w-4 h-4" />
                         )}
                       </button>
@@ -214,13 +214,13 @@ export const Home: React.FC = () => {
 
                 {/* Posts per page */}
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <span className="text-sm font-medium text-light-text dark:text-dark-text">
                     Per page:
                   </span>
                   <select
                     value={filters.size}
                     onChange={(e) => handlePageSizeChange(Number(e.target.value))}
-                    className="px-3 py-1.5 rounded-lg border text-sm transition-colors duration-200 bg-white border-gray-300 text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    className="px-3 py-1.5 rounded-lg border text-sm transition-colors duration-200 bg-light-card border-light-border text-light-text dark:bg-dark-bg dark:border-dark-border dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-primary-400/20"
                   >
                     <option value={6}>6</option>
                     <option value={12}>12</option>
@@ -244,7 +244,7 @@ export const Home: React.FC = () => {
             ) : data && data.content.length > 0 ? (
               <>
                 {/* Results Info */}
-                <div className="mb-6 text-sm text-gray-600 dark:text-gray-400">
+                <div className="mb-6 text-sm text-light-text-secondary dark:text-dark-text-secondary">
                   Showing {data.numberOfElements} of {data.totalElements} posts
                 </div>
 

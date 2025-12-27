@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --color-primary: #a855f7;
+    --color-primary-hover: #9333ea;
+    --color-bg: #fafafa;
+    --color-card: #ffffff;
+    --color-border: #e4e4e7;
+    --color-text: #18181b;
+    --color-text-secondary: #71717a;
+  }
+
+  .dark {
+    --color-primary: #c084fc;
+    --color-primary-hover: #a855f7;
+    --color-bg: #0a0a0a;
+    --color-card: #18181b;
+    --color-border: #27272a;
+    --color-text: #fafafa;
+    --color-text-secondary: #a1a1aa;
+  }
+
+  body {
+    @apply bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text;
+  }
+}
+
 @keyframes fade-in-up {
   from {
     opacity: 0;
@@ -46,11 +72,13 @@
 /* Custom minimal scrollbar for list view */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  scrollbar-color: rgba(156, 163, 175, 0.4) transparent;
+  overflow-x: hidden;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 2px;
+  width: 6px;
+  height: 0px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
@@ -58,25 +86,63 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(156, 163, 175, 0.5);
-  border-radius: 1px;
+  background: rgba(156, 163, 175, 0.4);
+  border-radius: 3px;
+  transition: background 0.2s ease;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(156, 163, 175, 0.7);
+  background: rgba(156, 163, 175, 0.6);
 }
 
 /* Dark mode scrollbar */
 .dark .custom-scrollbar {
-  scrollbar-color: rgba(75, 85, 99, 0.5) transparent;
+  scrollbar-color: rgba(107, 114, 128, 0.4) transparent;
 }
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(75, 85, 99, 0.5);
+  background: rgba(107, 114, 128, 0.4);
 }
 
 .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(75, 85, 99, 0.7);
+  background: rgba(107, 114, 128, 0.6);
+}
+
+/* Default browser scrollbar - minimal and theme-matched */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(168, 85, 247, 0.3);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(168, 85, 247, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(192, 132, 252, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(192, 132, 252, 0.5);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.3) transparent;
+}
+
+.dark * {
+  scrollbar-color: rgba(192, 132, 252, 0.3) transparent;
 }
 
 /* Smooth scroll behavior */

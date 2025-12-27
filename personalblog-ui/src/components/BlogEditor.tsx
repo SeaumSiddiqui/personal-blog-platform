@@ -66,14 +66,6 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const bannerInputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-resize textarea
-  useEffect(() => {
-    const textarea = textareaRef.current;
-    if (textarea) {
-      textarea.style.height = 'auto';
-      textarea.style.height = `${textarea.scrollHeight}px`;
-    }
-  }, [editorData.content]);
 
   const insertText = useCallback((before: string, after: string = '', placeholder: string = '', selectText: boolean = false) => {
     const textarea = textareaRef.current;
@@ -477,9 +469,9 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${
-      isDarkMode 
-        ? 'bg-gradient-to-br from-[#29323c] via-[#3a4550] to-[#485563]' 
-        : 'bg-gradient-to-br from-[#fdfbfb] via-[#f4f6f7] to-[#ebedee]'
+      isDarkMode
+        ? 'bg-dark-bg'
+        : 'bg-light-bg'
     }`}>
       {/* Floating Theme Toggle */}
       <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50">
@@ -488,7 +480,7 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
 
       {/* Header */}
       <header className={`sticky top-0 z-40 backdrop-blur-md border-b transition-colors duration-300 ${
-        isDarkMode ? 'bg-gray-900/80 border-gray-700' : 'bg-white/80 border-gray-200'
+        isDarkMode ? 'bg-dark-card/80 border-dark-border' : 'bg-light-card/80 border-light-border'
       }`}>
         <div className="flex items-center justify-between h-16 px-6">
           {/* Left-aligned elements */}
@@ -497,14 +489,14 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
               to="/blogs"
               className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors duration-200 ${
                 isDarkMode
-                  ? 'hover:bg-gray-700 text-gray-300'
-                  : 'hover:bg-gray-100 text-gray-600'
+                  ? 'hover:bg-dark-border text-dark-text'
+                  : 'hover:bg-light-border text-light-text'
               }`}
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back</span>
             </Link>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary-500 to-primary-400 bg-clip-text text-transparent">
               {isEditing ? 'Edit Blog' : 'Create Blog'}
             </h1>
           </div>
@@ -515,20 +507,20 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
               onClick={() => setShowPreview(!showPreview)}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors duration-200 ${
                 showPreview
-                  ? 'bg-blue-500 text-white'
+                  ? 'bg-primary-400 text-white dark:bg-primary-500'
                   : isDarkMode
-                  ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-dark-border text-dark-text hover:bg-dark-border/70'
+                  : 'bg-light-border text-light-text hover:bg-light-border/70'
               }`}
             >
               {showPreview ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               <span>{showPreview ? 'Hide Preview' : 'Show Preview'}</span>
             </button>
-            
+
             <button
               onClick={handleSave}
               disabled={isLoading}
-              className="flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center space-x-2 px-4 py-2 bg-primary-400 text-white rounded-lg hover:bg-primary-500 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-primary-500 dark:hover:bg-primary-600"
             >
               <Save className="w-4 h-4" />
               <span>{isLoading ? 'Saving...' : 'Save'}</span>
@@ -560,19 +552,19 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
         {/* Blog Meta Information */}
         <div className={`mb-6 p-6 rounded-xl shadow-sm border transition-colors duration-300 ${
           isDarkMode
-            ? 'bg-gray-800/50 border-gray-700'
-            : 'bg-white/70 border-gray-200'
+            ? 'bg-dark-card border-dark-border'
+            : 'bg-light-card border-light-border'
         }`}>
           {/* Banner Image Section */}
           <div className="mb-6">
-            <label className={`block text-sm font-medium mb-3 ${
-              isDarkMode ? 'text-gray-300' : 'text-gray-700'
+            <label className={`block text-sm font-medium mb-3 transition-colors duration-300 ${
+              isDarkMode ? 'text-dark-text' : 'text-light-text'
             }`}>
               <div className="flex items-center space-x-2">
                 <ImageIcon className="w-4 h-4" />
                 <span>Banner Image</span>
-                <span className={`text-xs ${
-                  isDarkMode ? 'text-gray-500' : 'text-gray-400'
+                <span className={`text-xs transition-colors duration-300 ${
+                  isDarkMode ? 'text-dark-text-secondary' : 'text-light-text-secondary'
                 }`}>
                   (Optional - Recommended: 1200x600px)
                 </span>
@@ -584,14 +576,18 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
                 <img
                   src={editorData.coverURL}
                   alt="Banner preview"
-                  className="w-full h-48 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
+                  className={`w-full h-48 object-cover rounded-lg border transition-colors duration-300 ${
+                    isDarkMode ? 'border-dark-border' : 'border-light-border'
+                  }`}
                 />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg flex items-center justify-center">
                   <div className="flex space-x-2">
                     <button
                       onClick={() => bannerInputRef.current?.click()}
                       disabled={uploadingBanner}
-                      className="px-3 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200 text-sm disabled:opacity-50"
+                      className={`px-3 py-2 text-white rounded-lg transition-colors duration-200 text-sm disabled:opacity-50 ${
+                        isDarkMode ? 'bg-primary-500 hover:bg-primary-600' : 'bg-primary-400 hover:bg-primary-500'
+                      }`}
                     >
                       {uploadingBanner ? 'Uploading...' : 'Change'}
                     </button>
@@ -614,8 +610,8 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
                   uploadingBanner
                     ? 'opacity-50 cursor-not-allowed'
                     : isDarkMode
-                    ? 'border-gray-600 hover:border-gray-500 text-gray-400 hover:bg-gray-800/30'
-                    : 'border-gray-300 hover:border-gray-400 text-gray-500 hover:bg-gray-50'
+                    ? 'border-dark-border hover:border-primary-500 text-dark-text-secondary hover:bg-dark-border/30'
+                    : 'border-light-border hover:border-primary-400 text-light-text-secondary hover:bg-light-border/50'
                 }`}
               >
                 {uploadingBanner ? (
@@ -635,8 +631,8 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className={`block text-sm font-medium mb-2 ${
-                isDarkMode ? 'text-gray-300' : 'text-gray-700'
+              <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
+                isDarkMode ? 'text-dark-text' : 'text-light-text'
               }`}>
                 Title *
               </label>
@@ -647,15 +643,15 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
                 placeholder="Enter blog title..."
                 className={`w-full px-4 py-2.5 rounded-lg border transition-colors duration-200 ${
                   isDarkMode
-                    ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500'
-                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500'
-                } focus:outline-none focus:ring-2 focus:ring-blue-500/20`}
+                    ? 'bg-dark-border border-dark-border text-dark-text placeholder-dark-text-secondary focus:border-primary-500'
+                    : 'bg-light-card border-light-border text-light-text placeholder-light-text-secondary focus:border-primary-400'
+                } focus:outline-none focus:ring-2 focus:ring-primary-500/20`}
               />
             </div>
-            
+
             <div>
-              <label className={`block text-sm font-medium mb-2 ${
-                isDarkMode ? 'text-gray-300' : 'text-gray-700'
+              <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
+                isDarkMode ? 'text-dark-text' : 'text-light-text'
               }`}>
                 Author *
               </label>
@@ -666,17 +662,17 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
                 placeholder="Enter author name..."
                 className={`w-full px-4 py-2.5 rounded-lg border transition-colors duration-200 ${
                   isDarkMode
-                    ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500'
-                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500'
-                } focus:outline-none focus:ring-2 focus:ring-blue-500/20`}
+                    ? 'bg-dark-border border-dark-border text-dark-text placeholder-dark-text-secondary focus:border-primary-500'
+                    : 'bg-light-card border-light-border text-light-text placeholder-light-text-secondary focus:border-primary-400'
+                } focus:outline-none focus:ring-2 focus:ring-primary-500/20`}
               />
             </div>
           </div>
 
           {/* Description */}
           <div className="mt-6">
-            <label className={`block text-sm font-medium mb-2 ${
-              isDarkMode ? 'text-gray-300' : 'text-gray-700'
+            <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
+              isDarkMode ? 'text-dark-text' : 'text-light-text'
             }`}>
               Description
             </label>
@@ -687,9 +683,9 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
               rows={3}
               className={`w-full px-4 py-2.5 rounded-lg border transition-colors duration-200 resize-none ${
                 isDarkMode
-                  ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500'
-                  : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500'
-              } focus:outline-none focus:ring-2 focus:ring-blue-500/20`}
+                  ? 'bg-dark-border border-dark-border text-dark-text placeholder-dark-text-secondary focus:border-primary-500'
+                  : 'bg-light-card border-light-border text-light-text placeholder-light-text-secondary focus:border-primary-400'
+              } focus:outline-none focus:ring-2 focus:ring-primary-500/20`}
             />
           </div>
 
@@ -718,17 +714,15 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
           showPreview ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1'
         }`}>
           {/* Editor Panel */}
-          <div className={`transition-all duration-300 ${
-            showPreview ? '' : 'max-w-5xl mx-auto'
-          }`}>
-            <div className={`rounded-xl shadow-sm border transition-colors duration-300 ${
+          <div className="transition-all duration-300 w-full">
+            <div className={`rounded-xl shadow-sm border transition-colors duration-300 overflow-hidden flex flex-col h-[820px] ${
               isDarkMode
-                ? 'bg-gray-800/50 border-gray-700'
-                : 'bg-white/70 border-gray-200'
+                ? 'bg-dark-card/50 border-dark-border'
+                : 'bg-light-card/70 border-light-border'
             }`}>
               {/* Fixed Toolbar */}
-              <div className={`sticky top-20 z-30 backdrop-blur-md border-b transition-colors duration-300 ${
-                isDarkMode ? 'bg-gray-800/90 border-gray-700' : 'bg-white/90 border-gray-200'
+              <div className={`sticky top-0 border-b transition-colors duration-300 flex-shrink-0 ${
+                isDarkMode ? 'bg-dark-card border-dark-border' : 'bg-light-card border-light-border'
               }`}>
                 <div className="p-4">
                   <div className="flex items-center justify-between flex-wrap gap-4">
@@ -740,28 +734,28 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
                           title={button.title}
                           className={`p-2 rounded-lg transition-colors duration-200 ${
                             isDarkMode
-                              ? 'hover:bg-gray-700 text-gray-300'
-                              : 'hover:bg-gray-100 text-gray-600'
+                              ? 'hover:bg-dark-border text-dark-text'
+                              : 'hover:bg-light-border text-light-text'
                           }`}
                         >
                           <button.icon className="w-4 h-4" />
                         </button>
                       ))}
                     </div>
-                    
+
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() => insertText('\n```\n', '\n```\n', 'code block', true)}
                         className={`flex items-center space-x-1 px-3 py-1.5 rounded-lg text-sm transition-colors duration-200 ${
                           isDarkMode
-                            ? 'hover:bg-gray-700 text-gray-300'
-                            : 'hover:bg-gray-100 text-gray-600'
+                            ? 'hover:bg-dark-border text-dark-text'
+                            : 'hover:bg-light-border text-light-text'
                         }`}
                       >
                         <Code className="w-4 h-4" />
                         <span className="hidden sm:inline">Code Block</span>
                       </button>
-                      
+
                       <button
                         onClick={() => fileInputRef.current?.click()}
                         disabled={uploadingImage}
@@ -769,8 +763,8 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
                           uploadingImage
                             ? 'opacity-50 cursor-not-allowed'
                             : isDarkMode
-                            ? 'hover:bg-gray-700 text-gray-300'
-                            : 'hover:bg-gray-100 text-gray-600'
+                            ? 'hover:bg-dark-border text-dark-text'
+                            : 'hover:bg-light-border text-light-text'
                         }`}
                       >
                         {uploadingImage ? <Upload className="w-4 h-4 animate-spin" /> : <Image className="w-4 h-4" />}
@@ -782,17 +776,17 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
               </div>
 
               {/* Editor */}
-              <div className="p-4">
+              <div className="flex-1 overflow-hidden flex">
                 <textarea
                   ref={textareaRef}
                   value={editorData.content}
                   onChange={(e) => setEditorData(prev => ({ ...prev, content: e.target.value }))}
                   onKeyDown={handleKeyDown}
                   placeholder="Start writing your blog post in Markdown..."
-                  className={`w-full min-h-[600px] resize-none border-none outline-none font-mono text-sm leading-relaxed ${
+                  className={`w-full h-full resize-none border-none outline-none font-mono text-sm leading-relaxed overflow-y-auto custom-scrollbar p-4 pr-2 ${
                     isDarkMode
-                      ? 'bg-transparent text-gray-100 placeholder-gray-500'
-                      : 'bg-transparent text-gray-900 placeholder-gray-500'
+                      ? 'bg-transparent text-dark-text placeholder-dark-text-secondary'
+                      : 'bg-transparent text-light-text placeholder-light-text-secondary'
                   }`}
                 />
               </div>
@@ -801,23 +795,23 @@ export const BlogEditor: React.FC<BlogEditorProps> = ({
 
           {/* Preview Panel */}
           {showPreview && (
-            <div className="lg:sticky lg:top-24 lg:h-fit">
-              <div className={`rounded-xl shadow-sm border transition-colors duration-300 ${
+            <div>
+              <div className={`rounded-xl shadow-sm border transition-colors duration-300 flex flex-col h-[820px] ${
                 isDarkMode
-                  ? 'bg-gray-800/50 border-gray-700'
-                  : 'bg-white/70 border-gray-200'
+                  ? 'bg-dark-card/50 border-dark-border'
+                  : 'bg-light-card/70 border-light-border'
               }`}>
-                <div className={`p-4 border-b ${
-                  isDarkMode ? 'border-gray-700' : 'border-gray-200'
+                <div className={`p-4 border-b flex-shrink-0 transition-colors duration-300 ${
+                  isDarkMode ? 'border-dark-border' : 'border-light-border'
                 }`}>
-                  <h3 className={`text-lg font-semibold ${
-                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  <h3 className={`text-lg font-semibold transition-colors duration-300 ${
+                    isDarkMode ? 'text-dark-text' : 'text-light-text'
                   }`}>
                     Live Preview
                   </h3>
                 </div>
-                <div className="p-6 max-h-[800px] overflow-y-auto">
-                  <MarkdownPreview 
+                <div className="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar p-6 pr-4">
+                  <MarkdownPreview
                     content={editorData.content}
                     title={editorData.title}
                     author={editorData.author}
