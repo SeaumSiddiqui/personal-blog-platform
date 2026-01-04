@@ -35,6 +35,9 @@ build/
 ### Env File ###
 .env
 
+### Propertise file
+src/main/resources/application-dev.yml
+
 ### OCI Config ###
 src/main/resources/config
 src/main/resources/ashikulbari009@gmail.com_2024-11-30T19_02_34.322Z.pem
