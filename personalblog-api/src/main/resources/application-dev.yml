@@ -4,9 +4,9 @@ spring:
       on-profile: dev
 
   datasource:
-    url: jdbc:postgresql://ep-cool-brook-a1p1f5eh-pooler.ap-southeast-1.aws.neon.tech/blogdb?sslmode=require
-    username: neondb_owner
-    password: npg_Vc2osteCX0PS
+    url: jdbc:postgresql://pg-cba7615-seaumsiddiqui-blog-site.d.aivencloud.com:13468/defaultdb?ssl=require
+    username: avnadmin
+    password: AVNS_wgZjpIxG1vGuN7am03c
     driver-class-name: org.postgresql.Driver
 
   jpa:
