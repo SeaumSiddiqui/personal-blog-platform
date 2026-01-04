@@ -1,5 +1,6 @@
 import React from 'react';
-import profileImageDark from '../../assets/profile-image-dark.png';
+import profileImageDark from '../../assets/profile-image-dark.webp';
+import profileImageLight from '../../assets/profile-image-light.webp';
 
 interface ProfileImageProps {
   isDarkMode: boolean;
@@ -22,7 +23,7 @@ export const ProfileImage: React.FC<ProfileImageProps> = ({ isDarkMode }) => {
           isDarkMode ? 'opacity-0' : 'opacity-100'
         }`}>
           <img
-            src={profileImageDark}
+            src={profileImageLight}
             alt="Profile"
             className="w-full h-full object-cover rounded-2xl shadow-2xl brightness-110 contrast-110"
           />
