@@ -28,7 +28,7 @@ jobs:
       - name: Build and push personalblog-ui image
         run: |
           docker buildx build \
-            --platform linux/amd64 \
+            --platform linux/amd64,linux/arm64 \
             --build-arg VITE_APP_ENV=production \
             --build-arg VITE_API_BASE_URL=${{ vars.VITE_API_BASE_URL }} \
             --build-arg VITE_API_BLOG_ENDPOINT=${{ vars.VITE_API_BLOG_ENDPOINT }} \
@@ -50,7 +50,11 @@ jobs:
           key: ${{ secrets.VM_SSH_KEY }}
           script: |
             cd ~/personalblog
+            echo "Pulling latest UI image"
             docker pull seaumsiddiqui0/personalblog-ui:latest
+            echo "Stopping old container if exists"
             docker compose stop personalblog-ui || true
             docker compose rm -f personalblog-ui || true
+            echo "Starting new container"
             docker compose up -d personalblog-ui
+            echo "Deployment finished"
