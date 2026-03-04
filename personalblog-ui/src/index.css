@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Magnat Text';
+  src: url('/fonts/MagnatText-Bold.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --color-primary: #a855f7;
@@ -24,7 +32,25 @@
   }
 
   body {
-    @apply bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text;
+    @apply bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text font-primary;
+  }
+
+  h1 {
+    @apply font-heading;
+  }
+
+  h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+
+  p {
+    @apply text-base leading-relaxed;
+  }
+
+  @media (max-width: 640px) {
+    p {
+      @apply text-sm;
+    }
   }
 }
 

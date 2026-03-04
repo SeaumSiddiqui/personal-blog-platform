@@ -4,6 +4,12 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        'primary': ['Inter', 'sans-serif'],
+        'heading': ['Magnat Text', 'sans-serif'],
+        'mono': ['JetBrains Mono', 'monospace'],
+        'serif': ['Playfair Display', 'serif'],
+      },
       colors: {
         primary: {
           50: '#faf5ff',

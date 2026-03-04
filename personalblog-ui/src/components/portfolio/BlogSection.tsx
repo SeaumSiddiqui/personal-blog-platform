@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ExternalLink } from 'lucide-react';
+import { AnimatedHeading } from './AnimatedHeading';
 import Banner1 from '../../assets/thumbnails/blogs/banner-blog-01.jpg';
 
 interface BlogPost {
@@ -36,11 +37,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ isDarkMode }) => {
   return (
     <section id="blogs" className="mb-16 scroll-mt-16 md:mb-24 lg:mb-36 lg:scroll-mt-24">
       <div className="sticky top-0 z-20 -mx-6 mb-4 w-screen bg-opacity-75 px-6 py-5 backdrop-blur md:-mx-12 md:px-12 lg:sr-only lg:relative lg:top-auto lg:mx-auto lg:w-full lg:px-0 lg:py-0 lg:opacity-0">
-        <h2 className={`text-sm font-bold uppercase tracking-widest ${
-          isDarkMode ? 'text-dark-text' : 'text-light-text'
-        }`}>
-          Blog
-        </h2>
+        <AnimatedHeading text="Blog" isDarkMode={isDarkMode} />
       </div>
 
       <div>
@@ -71,7 +68,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ isDarkMode }) => {
               </div>
 
               <div className="z-10 sm:col-span-6 flex flex-col justify-center">
-                <header className="mb-1 text-xs font-semibold uppercase tracking-wide text-light-text-secondary dark:text-dark-text-secondary">
+                <header className="mb-1 text-xs font-mono font-medium uppercase tracking-wide text-slate-400">
                   {post.date}
                 </header>
                 <h3 className="font-semibold leading-snug">
@@ -81,7 +78,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ isDarkMode }) => {
                     rel="noopener noreferrer"
                     className="group/link"
                   >
-                    <span className={`inline-flex items-baseline text-sm font-medium leading-tight transition-colors duration-300 group-hover:text-primary-500 ${
+                    <span className={`inline-flex items-baseline text-base font-medium leading-tight transition-colors duration-300 group-hover:text-primary-500 ${
                       isDarkMode ? 'text-dark-text' : 'text-light-text'
                     }`}>
                       <span className="absolute -inset-x-3 -inset-y-2 hidden rounded md:-inset-x-4 md:-inset-y-3 lg:block" />
